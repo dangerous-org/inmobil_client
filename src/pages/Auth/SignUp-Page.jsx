@@ -1,24 +1,44 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import UserInput from "../../components/Inputs/UserInput";
 import EmailInput from "../../components/Inputs/EmailInput";
 import PasswordInput from "../../components/Inputs/PassWordInput";
 import useForm from "../../hooks/useForm";
+import GoogleAuthButton from "../../components/GoogleAuthButton/GoogleAuthButton";
+import authStore from "../../store/authStore";
 import "./auth.css";
+import { useEffect } from "react";
 
 const SignUpPage = () => {
-  const User = {
+  const navigate = useNavigate();
+
+  const signUp = authStore((state) => state.signUp);
+  const setIsAuthenticated = authStore((state) => state.setIsAuthenticated);
+  const isAuthenticated = authStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/feed");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const { data, handleInputChange, resetForm } = useForm({
     username: "",
     email: "",
     password: "",
-  };
+  });
 
-  const { data, handleInputChange, resetForm } = useForm(User);
-
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    alert(JSON.stringify(data));
-    resetForm();
+    try {
+      await signUp(data);
+      setIsAuthenticated(true);
+      resetForm();
+      navigate("/feed");
+    } catch (error) {
+      setIsAuthenticated(false);
+      alert(error, " => sign up page");
+    }
   };
 
   return (
@@ -48,6 +68,7 @@ const SignUpPage = () => {
           <footer>
             <Link to={"/auth/sign-in"}>Are you member? Login</Link>
             <p>Or continue with</p>
+            <GoogleAuthButton />
           </footer>
         </section>
       </main>

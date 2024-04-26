@@ -5,24 +5,39 @@ import EmailInput from "../../components/Inputs/EmailInput";
 import PasswordInput from "../../components/Inputs/PassWordInput";
 import useForm from "../../hooks/useForm";
 import authStore from "../../store/authStore";
+import GoogleAuthButton from "../../components/GoogleAuthButton/GoogleAuthButton";
 import "./auth.css";
+import { useEffect } from "react";
 
 const SignInPage = () => {
-
   const navigate = useNavigate();
 
   const signIn = authStore((state) => state.signIn);
+  const setIsAuthenticated = authStore((state) => state.setIsAuthenticated);
+  const isAuthenticated = authStore((state) => state.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/feed");
+    }
+  }, [isAuthenticated, navigate]);
 
   const { data, handleInputChange, resetForm } = useForm({
     email: "",
     password: "",
   });
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    signIn(data);
-    resetForm();
-    navigate("/feed");
+    try {
+      await signIn(data);
+      setIsAuthenticated(true);
+      resetForm();
+      navigate("/feed");
+    } catch (error) {
+      setIsAuthenticated(false);
+      alert(error, " => sign in page");
+    }
   };
 
   return (
@@ -51,6 +66,7 @@ const SignInPage = () => {
           <footer>
             <Link to={"/auth/sign-up"}>Don't have an Account? Register</Link>
             <p>Or continue with</p>
+            <GoogleAuthButton />
           </footer>
         </section>
       </main>

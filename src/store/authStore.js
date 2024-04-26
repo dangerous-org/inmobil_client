@@ -3,7 +3,12 @@ import { create } from "zustand";
 
 const authStore = create((set) => ({
   user: null,
-  signIn: (data) => set(() => ({ user: data })),
+  googleToken: null,
+  isAuthenticated: false,
+  signIn: async (data) => set(() => ({ user: data })),
+  signUp: async (data) => set(() => ({ user: data })),
+  googleAuth: async (token) => set(() => ({ googleToken: token })),
+  setIsAuthenticated: (status) => set(() => ({ isAuthenticated: status })),
 }));
 
 export default authStore;
