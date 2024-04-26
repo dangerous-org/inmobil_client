@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Input } from "@nextui-org/react";
 import { EyeFilledIcon } from "../icons/EyeFilled";
 import { EyeSlashFilledIcon } from "../icons/EyeIcon";
+import PropTypes from "prop-types";
 
-const PasswordInput = ({onChange, value}) => {
+const PasswordInput = ({ onChange, value }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -35,3 +36,8 @@ const PasswordInput = ({onChange, value}) => {
   );
 };
 export default PasswordInput;
+
+PasswordInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};

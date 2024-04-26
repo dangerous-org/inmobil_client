@@ -6,9 +6,8 @@ import PasswordInput from "../../components/Inputs/PassWordInput";
 import useForm from "../../hooks/useForm";
 import authStore from "../../store/authStore";
 import GoogleAuthButton from "../../components/GoogleAuthButton/GoogleAuthButton";
-import "./auth.css";
 import { useEffect } from "react";
-
+import "./auth.css";
 const SignInPage = () => {
   const navigate = useNavigate();
 

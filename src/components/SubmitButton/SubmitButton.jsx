@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Button } from "@nextui-org/react";
 import PropTypes from "prop-types";
 const SubmitButton = ({ text }) => {
@@ -18,3 +17,7 @@ SubmitButton.prototype = {
 };
 
 export default SubmitButton;
+
+SubmitButton.propTypes = {
+  text: PropTypes.string
+}

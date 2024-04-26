@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 import "./Modal.css";
 const Modal = ({
   isOpen,
@@ -35,3 +36,11 @@ const Modal = ({
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
+};

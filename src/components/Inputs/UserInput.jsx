@@ -1,6 +1,7 @@
 import { Input } from "@nextui-org/react";
+import PropTypes from "prop-types";
 
-const UserInput = ({onChange, value}) => {
+const UserInput = ({ onChange, value }) => {
   return (
     <Input
       name="username"
@@ -16,3 +17,8 @@ const UserInput = ({onChange, value}) => {
 };
 
 export default UserInput;
+
+UserInput.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
