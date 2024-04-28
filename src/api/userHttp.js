@@ -14,3 +14,8 @@ export const authenticateUseHttp = async (token) => {
   const response = await axiosConfig.post("/users/authenticateUser", token);
   return response;
 };
+
+export const googleAuth = async (token) => {
+  const response = await axiosConfig.post("/users/googleOauth", {token});
+  return response;
+};

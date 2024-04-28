@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import Cookies from "js-cookie";
-import { signUpHttp, signInHttp, authenticateUseHttp } from "../api/userHttp";
+import {
+  signUpHttp,
+  signInHttp,
+  authenticateUseHttp,
+  googleAuth,
+} from "../api/userHttp";
 
 const authStore = create((set) => ({
   user: null,
@@ -27,13 +32,22 @@ const authStore = create((set) => ({
       set(() => ({ isAuthenticated: false }));
     }
   },
-  googleAuth: async (token) => set(() => ({ googleToken: token })),
+  googleAuth: async (token) => {
+    try {
+      const response = await googleAuth(token);
+      set(() => ({ user: response.data.User }));
+      set(() => ({ isAuthenticated: true }));
+    } catch (error) {
+      set(() => ({ message: error.response.data.message }));
+      set(() => ({ isAuthenticated: false }));
+    }
+  },
   authenticateUser: async () => {
     try {
       const token = Cookies.get("authToken");
       const response = await authenticateUseHttp(token);
-      set(() => ({ isAuthenticated: true }));
       set(() => ({ user: response.data }));
+      set(() => ({ isAuthenticated: true }));
     } catch (error) {
       set(() => ({ isAuthenticated: false }));
     }
