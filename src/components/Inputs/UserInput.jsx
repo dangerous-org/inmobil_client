@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 const UserInput = ({ onChange, value }) => {
   return (
     <Input
-      name="username"
+      name="userName"
       size="sm"
       type="text"
-      label="Username"
+      label="UserName"
       value={value}
       autoComplete="off"
       className="mb-6 mt-3"

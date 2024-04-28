@@ -1,19 +1,32 @@
-/* eslint-disable react/no-unescaped-entities */
-import { Link, useNavigate } from "react-router-dom";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import EmailInput from "../../components/Inputs/EmailInput";
 import PasswordInput from "../../components/Inputs/PassWordInput";
 import useForm from "../../hooks/useForm";
 import authStore from "../../store/authStore";
 import GoogleAuthButton from "../../components/GoogleAuthButton/GoogleAuthButton";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Toaster, toast } from 'sonner'
+import { useEffect, useCallback } from "react";
 import "./auth.css";
+
 const SignInPage = () => {
   const navigate = useNavigate();
 
   const signIn = authStore((state) => state.signIn);
-  const setIsAuthenticated = authStore((state) => state.setIsAuthenticated);
   const isAuthenticated = authStore((state) => state.isAuthenticated);
+  const message = authStore((state) => state.message);
+  const setMessage = authStore((state) => state.setMessage);
+
+  const { data, handleInputChange, resetForm } = useForm({
+    email: "",
+    password: "",
+  });
+
+  const notify = useCallback(() => {
+    if (message) {
+      toast.error(message, {className: "h-[50px] flex justify-center items-center", duration: 2000});
+    }
+  }, [message]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,27 +34,29 @@ const SignInPage = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const { data, handleInputChange, resetForm } = useForm({
-    email: "",
-    password: "",
-  });
+  useEffect(() => {
+    if (message) {
+      notify();
+    }
+    setMessage(null);
+  }, [message, notify, setMessage]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    try {
-      await signIn(data);
-      setIsAuthenticated(true);
-      resetForm();
-      navigate("/feed");
-    } catch (error) {
-      setIsAuthenticated(false);
-      alert(error, " => sign in page");
+
+    await signIn(data);
+    if (!isAuthenticated) {
+      return;
     }
+
+    resetForm();
+    navigate("/feed");
   };
 
   return (
     <div className="main-container">
       <main className="main">
+      <Toaster position="top-right" expand={true}/>
         <section id="section-img">
           <figure className="w-[100%] h-[100%] flex justify-center items-center">
             <img src="/ilustracion-casa.webp" alt="img" />
@@ -63,7 +78,7 @@ const SignInPage = () => {
             </form>
           </main>
           <footer>
-            <Link to={"/auth/sign-up"}>Don't have an Account? Register</Link>
+            <Link to={"/auth/sign-up"}>Dont have an Account? Register</Link>
             <p>Or continue with</p>
             <GoogleAuthButton />
           </footer>
