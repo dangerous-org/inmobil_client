@@ -53,7 +53,7 @@ const authStore = create((set) => ({
       set(() => ({ isAuthenticated: false }));
     }
   },
-  logOutUser: async () => {
+  logOutUser: () => {
     Cookies.remove('authToken');
     set(() => ({ user: null }));
     set(() => ({ isAuthenticated: false }));

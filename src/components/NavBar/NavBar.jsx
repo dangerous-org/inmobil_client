@@ -1,10 +1,11 @@
+import PropTypes from "prop-types";
 import SearchInput from "../SearchInput/SearchInput";
 import DropMenu from "../DropMenu/DropMenu";
 import { Divider } from "@nextui-org/react";
 import ButtonSign from "../ButtonSign/ButtonSign";
 import authStore from "../../store/authStore";
 import "./NavBar.css";
-const NavBar = () => {
+const NavBar = ({ setIsOpen }) => {
   const isAuthenticated = authStore((status) => status.isAuthenticated);
   return (
     <>
@@ -16,7 +17,11 @@ const NavBar = () => {
           </section>
 
           <section id="section2">
-            {isAuthenticated ? <DropMenu /> : <ButtonSign />}
+            {isAuthenticated ? (
+              <DropMenu setIsOpen={setIsOpen} />
+            ) : (
+              <ButtonSign />
+            )}
           </section>
         </nav>
       </header>
@@ -26,3 +31,7 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+NavBar.propTypes = {
+  setIsOpen: PropTypes.func.isRequired,
+};

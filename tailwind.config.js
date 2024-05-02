@@ -10,7 +10,8 @@ export default {
     extend: {
       colors:{
         'redDefault': "#f56965",
-        'lilaDefault': '#d69afc'
+        'lilaDefault': '#d69afc',
+        'whiteDefault': '#e6e6ed'
       }
     },
   },

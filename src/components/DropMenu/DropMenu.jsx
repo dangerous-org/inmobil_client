@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Dropdown,
   DropdownTrigger,
@@ -6,13 +7,27 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import authStore from "../../store/authStore";
-const DropMenu = () => {
+import { useNavigate } from "react-router-dom";
+
+const DropMenu = ({ setIsOpen }) => {
   const user = authStore((state) => state.user);
   const logOutUser = authStore((state) => state.logOutUser);
+  const navigate = useNavigate();
+
   const handleAction = (key) => {
     switch (key) {
+      case "home":
+        navigate("/feed");
+        break;
+      case "newPost":
+        setIsOpen(true);
+        break;
+      case "userInformation":
+        navigate(`/${user.userName}/information`);
+        break;
       case "logout":
         logOutUser();
+        break;
     }
   };
   return (
@@ -35,6 +50,20 @@ const DropMenu = () => {
             <p className="font-semibold">@{user && user.userName}</p>
           </DropdownItem>
           <DropdownItem
+            key="home"
+            color="none"
+            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+          >
+            Home
+          </DropdownItem>
+          <DropdownItem
+            key="newPost"
+            color="none"
+            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+          >
+            New Post
+          </DropdownItem>
+          <DropdownItem
             key="profile"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
@@ -42,18 +71,18 @@ const DropMenu = () => {
             Profile
           </DropdownItem>
           <DropdownItem
+            key="userInformation"
+            color="none"
+            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+          >
+            Personal Information
+          </DropdownItem>
+          <DropdownItem
             key="settings"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
             Settings
-          </DropdownItem>
-          <DropdownItem
-            key="information"
-            color="none"
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
-          >
-            Information
           </DropdownItem>
           <DropdownItem
             key="logout"
@@ -69,3 +98,7 @@ const DropMenu = () => {
 };
 
 export default DropMenu;
+
+DropMenu.propTypes = {
+  setIsOpen: PropTypes.func.isRequired,
+};
