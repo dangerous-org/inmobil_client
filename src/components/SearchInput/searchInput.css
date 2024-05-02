@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.searchInputContainer {
+  width: 320px;
+  height: 40px;
+  display: flex;
+  border: 1px solid #dcdcdc;
+  border-radius: 15px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+#searchInput {
+  height: 90%;
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  border-radius: 15px;
+}
+
+.searchIcon {
+  width: 2.4em;
+  height: 2.4em;
+  flex-grow: 0;
+}
+
+::placeholder {
+  font-size: medium;
+  transition: all 0.2s;
+}
+
+.searchInputContainer:hover {
+  ::placeholder {
+    font-size: smaller;
+  }
+}
