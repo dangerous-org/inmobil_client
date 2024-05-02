@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       colors:{
-        'redDefault': "#f56965"
+        'redDefault': "#f56965",
+        'lilaDefault': '#d69afc'
       }
     },
   },

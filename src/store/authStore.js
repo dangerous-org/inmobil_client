@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { create } from "zustand";
 import Cookies from "js-cookie";
 import {
@@ -51,6 +52,11 @@ const authStore = create((set) => ({
     } catch (error) {
       set(() => ({ isAuthenticated: false }));
     }
+  },
+  logOutUser: async () => {
+    Cookies.remove('authToken');
+    set(() => ({ user: null }));
+    set(() => ({ isAuthenticated: false }));
   },
   setMessage: (error) => set(() => ({ message: error })),
 }));
