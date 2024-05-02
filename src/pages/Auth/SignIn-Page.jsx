@@ -5,7 +5,7 @@ import useForm from "../../hooks/useForm";
 import authStore from "../../store/authStore";
 import GoogleAuthButton from "../../components/GoogleAuthButton/GoogleAuthButton";
 import { Link, useNavigate } from "react-router-dom";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 import { useEffect, useCallback } from "react";
 import "./auth.css";
 
@@ -24,7 +24,10 @@ const SignInPage = () => {
 
   const notify = useCallback(() => {
     if (message) {
-      toast.error(message, {className: "h-[50px] flex justify-center items-center", duration: 2000});
+      toast.error(message, {
+        className: "h-[50px] flex justify-center items-center",
+        duration: 2000,
+      });
     }
   }, [message]);
 
@@ -56,7 +59,7 @@ const SignInPage = () => {
   return (
     <div className="main-container">
       <main className="main">
-      <Toaster position="top-right" expand={true}/>
+        <Toaster position="top-right" expand={true} />
         <section id="section-img">
           <figure className="w-[100%] h-[100%] flex justify-center items-center">
             <img src="/ilustracion-casa.webp" alt="img" />

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import "./Modal.css";
+import { Divider } from "@nextui-org/react";
 const Modal = ({
   isOpen,
   onClose,
@@ -21,15 +22,16 @@ const Modal = ({
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className={"modal-overlay"}
+      className={"modal-overlay bg-whiteDefault"}
       style={styles}
     >
       <header className="modal-header">
         {title && <p className="modal-title">{title}</p>}
         <button onClick={onClose} className="close-button">
-          Cerrar
+          Close
         </button>
       </header>
+      <Divider/>
       {children}
     </motion.div>
   );
@@ -43,4 +45,5 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
+  children: PropTypes.node,
 };
