@@ -9,26 +9,39 @@ import {
   DatePicker,
 } from "@nextui-org/react";
 import NavBar from "../../components/NavBar/NavBar";
+import { status, typeOffers } from "../../data/selectData";
+import useFormMultiPart from "../../hooks/useFormMultiPart";
 import "./Feed.css";
+// import postStore from "../../store/postStore";
 
 const FeedPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // const createPost = postStore((state) => state.createPost);
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
-  const typeOffers = [
-    { label: "Sell", value: "sell" },
-    { label: "Rent", value: "rent" },
-  ];
+  const { handleChangeFiles, handleChange, data, photos } = useFormMultiPart({
+    title: "",
+    description: "",
+    typeOffer: "",
+    location: "",
+    status: "",
+    price: "",
+    builtDate: "",
+  });
 
-  const status = [
-    { label: "New", value: "new" },
-    { label: "Excellent condition", value: "excellent condition" },
-    { label: "Good condition", value: "good condition" },
-    { label: "To renew", value: "to renew" },
-  ];
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    const formData = new FormData();
+    formData.append("data", data);
+    for (let i = 0; i < photos.length; i++) {
+      formData.append("photos", photos);
+    }
+    console.log(data);
+    console.log(photos);
+  };
 
   return (
     <div
@@ -45,16 +58,28 @@ const FeedPage = () => {
           width={"920"}
           height={"600"}
         >
-          <form action="" className="p-6">
+          <form onSubmit={handleSubmit} className="p-6">
             <section className="w-full flex flex-col">
               <div className="flex gap-2">
-                <Input type="text" label="Title" name="title" />
-                <Input type="number" label="Price" name="price" />
+                <Input
+                  type="text"
+                  label="Title"
+                  name="title"
+                  onChange={handleChange}
+                />
+                <Input
+                  type="number"
+                  label="Price"
+                  name="price"
+                  onChange={handleChange}
+                />
               </div>
               <Textarea
                 label="Description"
                 placeholder="Enter your description"
                 className="w-full mt-4"
+                name="description"
+                onChange={handleChange}
               />
             </section>
             <section className="w-full flex mt-4 justify-between gap-2">
@@ -63,18 +88,34 @@ const FeedPage = () => {
                 label="Location"
                 name="location"
                 className="max-w-md"
+                onChange={handleChange}
               />
-              <DatePicker label="Built Date" className="max-w-md" />
+              <DatePicker
+                label="Built Date"
+                className="max-w-md"
+                name="builtDate"
+                onChange={handleChange}
+              />
             </section>
             <section className="flex gap-2 mt-4">
-              <Select label="Type Offer" className="max-w-md">
+              <Select
+                label="Type Offer"
+                className="max-w-md"
+                name="typeOffer"
+                onChange={handleChange}
+              >
                 {typeOffers.map((type) => (
                   <SelectItem key={type.value} value={type.value}>
                     {type.label}
                   </SelectItem>
                 ))}
               </Select>
-              <Select label="Status" className="max-w-md">
+              <Select
+                label="Status"
+                className="max-w-md"
+                name="status"
+                onChange={handleChange}
+              >
                 {status.map((status) => (
                   <SelectItem key={status.value} value={status.value}>
                     {status.label}
@@ -89,10 +130,16 @@ const FeedPage = () => {
                   multiple
                   classes="dragFile"
                   label="Upload photos"
+                  handleChange={(files) => handleChangeFiles(files)}
                 />
               </div>
               <div className="flex-1">
-                <button>xddddd</button>
+                <button
+                  type="submit"
+                  className="py-4 px-8 bg-lilaDefault text-white rounded-md"
+                >
+                  save
+                </button>
               </div>
             </section>
           </form>
