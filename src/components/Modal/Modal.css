@@ -1,6 +1,8 @@
 .modal-overlay {
-  margin: auto;
+  position: relative;
+  margin: -30px auto;
   border-radius: 10px;
+  z-index: 1000;
 }
 
 .modal-content {

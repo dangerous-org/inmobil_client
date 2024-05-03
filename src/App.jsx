@@ -6,9 +6,14 @@ import AppRoutes from "./routes/AppRoutes";
 import { useEffect } from "react";
 function App() {
   const authenticateUser = authStore((state) => state.authenticateUser);
+
   useEffect(() => {
-    authenticateUser();
+    const checkAuthentication = async () => {
+      await authenticateUser();
+    };
+    checkAuthentication();
   }, [authenticateUser]);
+
   return (
     <GoogleOAuthProvider clientId="814836190695-tpbaduo3d2ikak1d5ne3a0251qfo281n.apps.googleusercontent.com">
       <NextUIProvider>
