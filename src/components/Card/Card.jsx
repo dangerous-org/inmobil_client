@@ -1,24 +1,21 @@
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 import Carrousel from "../Carrousel/Carrousel";
 import "./Card.css";
-const Card = ({images}) => {
-  
+import { Link } from "react-router-dom";
+const Card = ({ post }) => {
   return (
     <div className="card">
       <header className="cardHeader">
-        <Carrousel images={images} />
+        <Carrousel images={post.photos} />
       </header>
       <main className="cardBody">
         <div className="cardBodyContent">
-          <p>
-            Lorem ipsum es el texto que se usa habitualmente en diseño gráfico
-            en demostraciones de tipografías o de borradores de diseño para
-            probar el.
-          </p>
+          <p>{post.description}</p>
         </div>
+        <Link to={`/${post.user.userName}`}>@{post.user.userName}</Link>
       </main>
       <footer className="cardFooter">
-        <strong>$140.000.000.00</strong>
+        <strong>${post.price}</strong>
       </footer>
     </div>
   );
@@ -27,5 +24,5 @@ const Card = ({images}) => {
 export default Card;
 
 Card.propTypes = {
-  images: PropTypes.array.isRequired
-}
+  post: PropTypes.array.isRequired,
+};

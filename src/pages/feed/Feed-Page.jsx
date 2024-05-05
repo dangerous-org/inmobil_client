@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import Modal from "../../components/Modal/Modal";
 import {
@@ -9,68 +8,123 @@ import {
   DatePicker,
 } from "@nextui-org/react";
 import NavBar from "../../components/NavBar/NavBar";
-import { status, typeOffers } from "../../data/selectData";
+import { status, typeEstates, typeOffers } from "../../data/selectData";
 import useFormMultiPart from "../../hooks/useFormMultiPart";
+import ButtonSpinner from "../../components/ButtonSpinner/ButtonSpinner";
+import moment from "moment";
+import authStore from "../../store/authStore";
+import utilStore from "../../store/utilStore";
 import "./Feed.css";
-// import postStore from "../../store/postStore";
+
+import postStore from "../../store/postStore";
+import { useEffect } from "react";
+import Card from "../../components/Card/Card";
 
 const FeedPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  // const createPost = postStore((state) => state.createPost);
+  const isModalOpen = utilStore((state) => state.isModalOpen);
+  const closeModal = utilStore((state) => state.closeModal);
+
+  const createPost = postStore((state) => state.createPost);
+  const getPosts = postStore((state) => state.getPosts);
+  const post = postStore((state) => state.post);
+  const message = postStore((state) => state.message);
+  const setMessage = postStore((state) => state.setMessage);
+  const user = authStore((state) => state.user);
+
+  useEffect(() => {
+    const getPostsHttp = async () => {
+      await getPosts();
+    };
+    getPostsHttp();
+  }, [getPosts]);
 
   const handleClose = () => {
-    setIsOpen(false);
+    closeModal();
+    clearForm();
+    setMessage(null);
   };
 
-  const { handleChangeFiles, handleChange, data, photos } = useFormMultiPart({
+  const {
+    handleChangeFiles,
+    handleChange,
+    handleDateChange,
+    clearForm,
+    data,
+    photos,
+    date,
+  } = useFormMultiPart({
     title: "",
     description: "",
     typeOffer: "",
     location: "",
     status: "",
     price: "",
-    builtDate: "",
+    typeEstate: "",
   });
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const formData = new FormData();
-    formData.append("data", data);
-    for (let i = 0; i < photos.length; i++) {
-      formData.append("photos", photos);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("typeOffer", data.typeOffer);
+    formData.append("location", data.location);
+    formData.append("status", data.status);
+    formData.append("price", data.price);
+    formData.append("typeEstate", data.typeEstate);
+    formData.append("builtDate", moment(date).format());
+    formData.append("user", user._id);
+    photos.forEach((photo) => {
+      formData.append("photos", photo);
+    });
+
+    const res = await createPost(formData);
+    if (res?.status == 201) {
+      clearForm();
+      setMessage(res.data.message);
     }
-    console.log(data);
-    console.log(photos);
   };
 
   return (
     <div
       className={`w-screen h-screen flex flex-col ${
-        isOpen ? "modal-open" : ""
+        isModalOpen ? "modal-open" : ""
       }`}
     >
-      <NavBar setIsOpen={setIsOpen} />
+      <NavBar />
       <main className="flex-1 pt-5">
+        <section className="w-[90%] mx-auto flex justify-between flex-wrap">
+          {post &&
+            post?.map((post) => {
+              return <Card key={post._id} post={post} />;
+            })}
+        </section>
         <Modal
           title={"Create a new post"}
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onClose={handleClose}
-          width={"920"}
-          height={"600"}
+          width={"880"}
+          height={"560"}
         >
           <form onSubmit={handleSubmit} className="p-6">
             <section className="w-full flex flex-col">
               <div className="flex gap-2">
                 <Input
+                  size="sm"
                   type="text"
                   label="Title"
                   name="title"
+                  variant="bordered"
+                  value={data.title}
                   onChange={handleChange}
                 />
                 <Input
+                  size="sm"
                   type="number"
                   label="Price"
                   name="price"
+                  variant="bordered"
+                  value={data.price}
                   onChange={handleChange}
                 />
               </div>
@@ -79,29 +133,40 @@ const FeedPage = () => {
                 placeholder="Enter your description"
                 className="w-full mt-4"
                 name="description"
+                variant="bordered"
+                value={data.description}
+                maxRows={3}
                 onChange={handleChange}
               />
             </section>
             <section className="w-full flex mt-4 justify-between gap-2">
               <Input
+                size="sm"
                 type="text"
                 label="Location"
                 name="location"
                 className="max-w-md"
+                variant="bordered"
+                value={data.location}
                 onChange={handleChange}
               />
               <DatePicker
+                size="sm"
                 label="Built Date"
                 className="max-w-md"
                 name="builtDate"
-                onChange={handleChange}
+                variant="bordered"
+                onChange={handleDateChange}
               />
             </section>
             <section className="flex gap-2 mt-4">
               <Select
+                size="sm"
                 label="Type Offer"
                 className="max-w-md"
                 name="typeOffer"
+                variant="bordered"
+                value={data.typeOffer}
                 onChange={handleChange}
               >
                 {typeOffers.map((type) => (
@@ -111,9 +176,12 @@ const FeedPage = () => {
                 ))}
               </Select>
               <Select
+                size="sm"
                 label="Status"
                 className="max-w-md"
                 name="status"
+                variant="bordered"
+                value={data.status}
                 onChange={handleChange}
               >
                 {status.map((status) => (
@@ -133,16 +201,27 @@ const FeedPage = () => {
                   handleChange={(files) => handleChangeFiles(files)}
                 />
               </div>
-              <div className="flex-1">
-                <button
-                  type="submit"
-                  className="py-4 px-8 bg-lilaDefault text-white rounded-md"
+              <div className="flex-1 flex flex-col justify-between">
+                <Select
+                  size="sm"
+                  label="Type Estate"
+                  className="max-w-md"
+                  name="typeEstate"
+                  variant="bordered"
+                  value={data.typeEstate}
+                  onChange={handleChange}
                 >
-                  save
-                </button>
+                  {typeEstates.map((estate) => (
+                    <SelectItem key={estate.value} value={estate.value}>
+                      {estate.label}
+                    </SelectItem>
+                  ))}
+                </Select>
+                <ButtonSpinner text="Create Post" />
               </div>
             </section>
           </form>
+          {message && <p className="text-center">{message}</p>}
         </Modal>
       </main>
     </div>

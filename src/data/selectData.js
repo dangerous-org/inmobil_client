@@ -9,3 +9,13 @@ export const status = [
   { label: "Good condition", value: "good condition" },
   { label: "To renew", value: "to renew" },
 ];
+
+export const typeEstates = [
+  { label: "Residential", value: "residential" },
+  { label: "Commercial", value: "commercial" },
+  { label: "Industrial", value: "industrial" },
+  { label: "Land", value: "land" },
+  { label: "Rural", value: "rural" },
+  { label: "Recreational", value: "recreational" },
+  { label: "Institutional", value: "institutional" }
+];

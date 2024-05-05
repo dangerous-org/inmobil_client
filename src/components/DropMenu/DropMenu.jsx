@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {
   Dropdown,
   DropdownTrigger,
@@ -7,12 +6,15 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import authStore from "../../store/authStore";
+import utilStore from "../../store/utilStore";
 import { useNavigate } from "react-router-dom";
 
-const DropMenu = ({ setIsOpen }) => {
+const DropMenu = () => {
   const user = authStore((state) => state.user);
   const logOutUser = authStore((state) => state.logOutUser);
   const navigate = useNavigate();
+
+  const openModal = utilStore((state) => state.openModal);
 
   const handleAction = (key) => {
     switch (key) {
@@ -20,7 +22,7 @@ const DropMenu = ({ setIsOpen }) => {
         navigate("/feed");
         break;
       case "newPost":
-        setIsOpen(true);
+        openModal();
         break;
       case "userInformation":
         navigate(`/${user.userName}/information`);
@@ -98,7 +100,3 @@ const DropMenu = ({ setIsOpen }) => {
 };
 
 export default DropMenu;
-
-DropMenu.propTypes = {
-  setIsOpen: PropTypes.func.isRequired,
-};
