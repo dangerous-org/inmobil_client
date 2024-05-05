@@ -24,7 +24,7 @@ const Modal = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{duration: 0.4}}
-        className={"modal-overlay bg-[#fefefe] border-medium"}
+        className={"modal-overlay bg-white"}
         style={styles}
       >
         <header className="modal-header">

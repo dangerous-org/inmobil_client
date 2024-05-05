@@ -15,5 +15,5 @@
 .dragFile {
   width: 100% !important;
   height: 100% !important;
-  border: 3px solid #f4f4f5 !important;
+  border: 2px solid lightgray !important;
 }

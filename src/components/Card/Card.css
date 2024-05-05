@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -12,7 +12,7 @@
   flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cardHeader {
@@ -20,12 +20,13 @@
   height: 200px;
 }
 
-.cardBody{
+.cardBody {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   padding: 5px;
 }
 
-.cardFooter{
+.cardFooter {
   padding-left: 5px;
 }

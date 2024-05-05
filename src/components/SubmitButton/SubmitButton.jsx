@@ -19,5 +19,5 @@ SubmitButton.prototype = {
 export default SubmitButton;
 
 SubmitButton.propTypes = {
-  text: PropTypes.string
-}
+  text: PropTypes.string,
+};
