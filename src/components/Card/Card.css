@@ -6,13 +6,12 @@
 
 .card {
   width: 300px;
-  height: 350px;
+  height: 320px;
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .cardHeader {
@@ -28,5 +27,7 @@
 }
 
 .cardFooter {
-  padding-left: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
 }

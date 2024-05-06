@@ -12,7 +12,7 @@ const Modal = ({
 }) => {
   const styles = {
     width: `${width}px`,
-    height: `${height}px`,
+    height: `${height}px`, 
   };
 
   if (!isOpen) return null;

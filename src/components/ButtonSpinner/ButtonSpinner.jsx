@@ -4,7 +4,7 @@ import postStore from "../../store/postStore";
 const ButtonSpinner = ({ text }) => {
   const isLoading = postStore((state) => state.isLoading);
   return isLoading ? (
-    <Spinner label="Loading" color="secondary" size="md" />
+    <Spinner label="Loading" color="secondary" size="sm" />
   ) : (
     <button
       type="submit"

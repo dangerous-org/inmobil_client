@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,6 +17,7 @@
   z-index: 60;
   top: 45%;
   left: 2px;
+  display: none;
 }
 
 .rightArrowButton {
@@ -32,6 +33,7 @@
   z-index: 50;
   top: 45%;
   right: 2px;
+  display: none;
 }
 
 .carrousel {
@@ -44,8 +46,12 @@
 .carrousel-images {
   width: 100%;
   height: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 10px;
+}
+
+.carrousel:hover .leftArrowButton,
+.carrousel:hover .rightArrowButton{
+  display: flex;
 }
 
 .carrouselFooter {

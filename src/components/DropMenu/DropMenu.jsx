@@ -27,19 +27,23 @@ const DropMenu = () => {
       case "userInformation":
         navigate(`/${user.userName}/information`);
         break;
+      case "profile":
+        navigate(`/${user.userName}`)
+        break;
       case "logout":
         logOutUser();
         break;
     }
   };
   return (
-    <div className="flex items-center gap-4 absolute right-4">
+    <div className="flex items-center gap-4 absolute right-6">
       <Dropdown placement="bottom-end">
         <DropdownTrigger>
           <Avatar
+            isBordered
             as="button"
             className="transition-transform"
-            src="https://i.pinimg.com/736x/e3/f5/78/e3f57895ec71b8cc501e0794d975b339.jpg"
+            src="https://i.pinimg.com/564x/da/4c/31/da4c31567bb5dae43982c181bf1f11f7.jpg"
           />
         </DropdownTrigger>
         <DropdownMenu
