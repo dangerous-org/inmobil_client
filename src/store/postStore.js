@@ -20,10 +20,13 @@ const postStore = create((set) => ({
   getPosts: async () => {
     try {
       const response = await getPosts();
+      set(() => ({ isLoading: true }));
       set(() => ({ post: response.data }));
       return response;
     } catch (error) {
       set(() => ({ message: error.response.data.message }));
+    } finally {
+      set(() => ({ isLoading: false }));
     }
   },
   setMessage: (error) => {

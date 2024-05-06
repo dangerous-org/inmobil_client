@@ -14,11 +14,10 @@ import ButtonSpinner from "../../components/ButtonSpinner/ButtonSpinner";
 import moment from "moment";
 import authStore from "../../store/authStore";
 import utilStore from "../../store/utilStore";
-import "./Feed.css";
-
 import postStore from "../../store/postStore";
 import { useEffect } from "react";
 import Card from "../../components/Card/Card";
+import "./Feed.css";
 
 const FeedPage = () => {
   const isModalOpen = utilStore((state) => state.isModalOpen);
@@ -29,6 +28,8 @@ const FeedPage = () => {
   const post = postStore((state) => state.post);
   const message = postStore((state) => state.message);
   const setMessage = postStore((state) => state.setMessage);
+  const isLoading = postStore((state) => state.isLoading);
+
   const user = authStore((state) => state.user);
 
   useEffect(() => {
@@ -87,17 +88,20 @@ const FeedPage = () => {
 
   return (
     <div
-      className={`w-screen h-screen flex flex-col ${
+      className={`w-screen h-screen flex flex-col overflow-x-hidden ${
         isModalOpen ? "modal-open" : ""
       }`}
     >
       <NavBar />
       <main className="flex-1 pt-5">
-        <section className="w-[90%] mx-auto flex justify-between flex-wrap">
-          {post &&
+        <section  className="w-[95%] gap-2 mx-auto flex justify-center flex-wrap mb-5" >
+          {isLoading ? (
+            <p> loading </p>
+          ) : (
             post?.map((post) => {
               return <Card key={post._id} post={post} />;
-            })}
+            })
+          )}
         </section>
         <Modal
           title={"Create a new post"}
@@ -220,8 +224,8 @@ const FeedPage = () => {
                 <ButtonSpinner text="Create Post" />
               </div>
             </section>
+            {message && <p className="text-center mt-3 ">{message}</p>}
           </form>
-          {message && <p className="text-center">{message}</p>}
         </Modal>
       </main>
     </div>
