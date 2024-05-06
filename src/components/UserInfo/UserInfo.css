@@ -5,6 +5,7 @@
   justify-content: start;
   align-items: center;
   padding-left: 60px;
+  gap: 60px;
 }
 
 .User-photo {

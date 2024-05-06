@@ -7,9 +7,11 @@ import {
 } from "@nextui-org/react";
 import authStore from "../../store/authStore";
 import utilStore from "../../store/utilStore";
+// import userProfileStore from "../../store/userProfile.store";
 import { useNavigate } from "react-router-dom";
 
 const DropMenu = () => {
+  // const userprofile = userProfileStore((state)=>state.userProfile)
   const user = authStore((state) => state.user);
   const logOutUser = authStore((state) => state.logOutUser);
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const DropMenu = () => {
         navigate(`/${user.userName}/information`);
         break;
       case "profile":
-        navigate(`/${user.userName}`)
+        navigate(`/${user.userName}`);
         break;
       case "logout":
         logOutUser();

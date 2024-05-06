@@ -20,7 +20,7 @@ export const googleAuth = async (token) => {
   return response;
 };
 
-// export const logOutUserHttp = async () => {
-//   const response = await axiosConfig.post("/users/logOut");
-//   return response;
-// };
+export const logOutUserHttp = async () => {
+  const response = await axiosConfig.post("/users/logOut");
+  return response;
+};

@@ -1,6 +1,18 @@
+import { useEffect } from "react";
 import NavBar from "../../../components/NavBar/NavBar";
 import { UserInfo } from "../../../components/UserInfo/UserInfo";
+import { useParams } from "react-router-dom";
+import userProfileStore from "../../../store/userProfile.store";
 const ProfilePage = () => {
+  const { userName } = useParams();
+  const getUserProfile = userProfileStore((state) => state.getUserProfile);
+  useEffect(() => {
+    const http = async () => {
+      await getUserProfile(userName);
+    };
+    http();
+  }, [getUserProfile, userName]);
+
   return (
     <div className="w-screen h-screen flex flex-col overflow-x-hidden">
       <NavBar />
