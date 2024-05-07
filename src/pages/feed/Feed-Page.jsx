@@ -20,6 +20,7 @@ import Card from "../../components/Card/Card";
 import "./Feed.css";
 
 const FeedPage = () => {
+  const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const isModalOpen = utilStore((state) => state.isModalOpen);
   const closeModal = utilStore((state) => state.closeModal);
 
@@ -42,6 +43,7 @@ const FeedPage = () => {
   const handleClose = () => {
     closeModal();
     clearForm();
+    setDropMenuDisabled(false);
     setMessage(null);
   };
 
@@ -81,7 +83,7 @@ const FeedPage = () => {
 
     const res = await createPost(formData);
     if (res?.status == 201) {
-      clearForm();
+      handleClose();
       setMessage(res.data.message);
     }
   };
@@ -94,7 +96,7 @@ const FeedPage = () => {
     >
       <NavBar />
       <main className="flex-1 pt-5">
-        <section  className="w-[95%] gap-2 mx-auto flex justify-center flex-wrap mb-5" >
+        <section className="w-[95%] gap-2 mx-auto flex justify-center flex-wrap mb-5">
           {isLoading ? (
             <p> loading </p>
           ) : (
@@ -160,6 +162,7 @@ const FeedPage = () => {
                 className="max-w-md"
                 name="builtDate"
                 variant="bordered"
+                showMonthAndYearPickers
                 onChange={handleDateChange}
               />
             </section>

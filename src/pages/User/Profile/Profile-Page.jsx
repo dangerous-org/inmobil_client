@@ -4,8 +4,10 @@ import { UserInfo } from "../../../components/UserInfo/UserInfo";
 import { useParams } from "react-router-dom";
 import userProfileStore from "../../../store/userProfile.store";
 const ProfilePage = () => {
+
   const { userName } = useParams();
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
+
   useEffect(() => {
     const http = async () => {
       await getUserProfile(userName);
@@ -35,7 +37,7 @@ const ProfilePage = () => {
         </aside>
         <section className="flex flex-col flex-1 ">
           <UserInfo />
-          <div className="flex-1 pl-[60px]">
+          <div className="flex-1 pl-[100px]">
             <h3 className="text-2xl mt-4">My Posts</h3>
           </div>
         </section>

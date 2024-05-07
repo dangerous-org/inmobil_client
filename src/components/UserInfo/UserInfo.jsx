@@ -4,9 +4,10 @@ import userProfileStore from "../../store/userProfile.store";
 import "./UserInfo.css";
 
 export const UserInfo = () => {
+
   const userProfile = userProfileStore((state) => state.userProfile);
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
-  console.log(userProfile);
+
   return isProfileLoading ? (
     <p>Loading ...</p>
   ) : (
@@ -19,7 +20,6 @@ export const UserInfo = () => {
         <p>@{userProfile.user && userProfile.user.userName}</p>
         <p className="mt-1 mb-1">{userProfile.biography || "No description"}</p>
         <span>
-          {" "}
           <LocationIcon /> {userProfile.location || "No location"}{" "}
         </span>
       </div>

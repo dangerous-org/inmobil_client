@@ -7,15 +7,17 @@ import {
 } from "@nextui-org/react";
 import authStore from "../../store/authStore";
 import utilStore from "../../store/utilStore";
-// import userProfileStore from "../../store/userProfile.store";
 import { useNavigate } from "react-router-dom";
 
 const DropMenu = () => {
-  // const userprofile = userProfileStore((state)=>state.userProfile)
-  const user = authStore((state) => state.user);
-  const logOutUser = authStore((state) => state.logOutUser);
   const navigate = useNavigate();
 
+  const user = authStore((state) => state.user);
+  const logOutUser = authStore((state) => state.logOutUser);
+
+  // const currentPath = utilStore((state) => state.currentPath);
+  const dropMenuDisabled = utilStore((state) => state.dropMenuDisabled);
+  const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const openModal = utilStore((state) => state.openModal);
 
   const handleAction = (key) => {
@@ -24,6 +26,7 @@ const DropMenu = () => {
         navigate("/feed");
         break;
       case "newPost":
+        setDropMenuDisabled(true);
         openModal();
         break;
       case "userInformation":
@@ -37,9 +40,10 @@ const DropMenu = () => {
         break;
     }
   };
+
   return (
     <div className="flex items-center gap-4 absolute right-6">
-      <Dropdown placement="bottom-end">
+      <Dropdown placement="bottom-end" isDisabled={dropMenuDisabled}>
         <DropdownTrigger>
           <Avatar
             isBordered
@@ -53,12 +57,17 @@ const DropMenu = () => {
           variant="flat"
           onAction={(key) => handleAction(key)}
         >
-          <DropdownItem key="profileInfo" className="h-14 gap-2">
+          <DropdownItem
+            key="profileInfo"
+            textValue={`Signed in as @${user && user.userName}`}
+            className="h-14 gap-2"
+          >
             <p className="font-semibold">Signed in as</p>
             <p className="font-semibold">@{user && user.userName}</p>
           </DropdownItem>
           <DropdownItem
             key="home"
+            textValue="Home"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
@@ -66,6 +75,7 @@ const DropMenu = () => {
           </DropdownItem>
           <DropdownItem
             key="newPost"
+            textValue="New Post"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
@@ -73,6 +83,7 @@ const DropMenu = () => {
           </DropdownItem>
           <DropdownItem
             key="profile"
+            textValue="Profile"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
@@ -80,6 +91,7 @@ const DropMenu = () => {
           </DropdownItem>
           <DropdownItem
             key="userInformation"
+            textValue="Personal Information"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
@@ -87,6 +99,7 @@ const DropMenu = () => {
           </DropdownItem>
           <DropdownItem
             key="settings"
+            textValue="Settings"
             color="none"
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
@@ -94,6 +107,7 @@ const DropMenu = () => {
           </DropdownItem>
           <DropdownItem
             key="logout"
+            textValue="LogOut"
             color="none"
             className="hover:bg-redDefault hover:text-white transition-all duration-200"
           >
