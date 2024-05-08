@@ -1,20 +1,27 @@
-import LocationIcon from '../icons/LocationIcon'
+import LocationIcon from "../icons/LocationIcon";
+import { Avatar } from "@nextui-org/react";
+import userProfileStore from "../../store/userProfile.store";
 import "./UserInfo.css";
 
 export const UserInfo = () => {
-  return (
+
+  const userProfile = userProfileStore((state) => state.userProfile);
+  const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
+
+  return isProfileLoading ? (
+    <p>Loading ...</p>
+  ) : (
     <section className="user-info-container">
-      <img
-        src="https://thispersondoesnotexist.com/"
-        alt="User-Profile-Photo"
-        className="User-photo"
-      />
+      <Avatar src={userProfile.picture} size="lg" isBordered alt="xdd"></Avatar>
       <div className="ml-4">
-        <h2 className="text-xl font-semibold text-gray-900">ALEX G</h2>
-        <h4 className="mt-1 mb-1">
-          Lorem ipsum dolor sit amet consectetur <br /> adipisicing elit.
-        </h4>
-        <LocationIcon/>
+        <h2 className="text-xl font-semibold text-gray-900">
+          {userProfile.names + ' ' + userProfile.lastName || "No name"}
+        </h2>
+        <p>@{userProfile.user && userProfile.user.userName}</p>
+        <p className="mt-1 mb-1">{userProfile.biography || "No description"}</p>
+        <span>
+          <LocationIcon /> {userProfile.location || "No location"}{" "}
+        </span>
       </div>
     </section>
   );

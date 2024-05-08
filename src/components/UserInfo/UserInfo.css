@@ -4,7 +4,8 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding-left: 60px;
+  padding-left: 100px;
+  gap: 60px;
 }
 
 .User-photo {

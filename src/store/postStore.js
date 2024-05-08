@@ -9,7 +9,7 @@ const postStore = create((set) => ({
     try {
       set(() => ({ isLoading: true }));
       const response = await createPost(data);
-      set(() => ({ post: response.data }));
+      set(() => ({ post: response.data.post }));
       return response;
     } catch (error) {
       set(() => ({ message: error.response.data.message }));
