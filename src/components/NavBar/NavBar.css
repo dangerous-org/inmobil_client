@@ -5,8 +5,12 @@
 }
 
 .navbarHeader {
-  width: 100%;
+  width: calc(100% - 17px);
   height: 70px;
+  position: fixed;
+  z-index: 100;
+  background-color: #fafafa;
+  max-width: 100vw;
 }
 
 .navbar {
@@ -31,7 +35,7 @@
 
 #imbLogo {
   width: 80px;
-  height: 70px;
+  height: 60px;
   border-radius: 100%;
   margin-left: 20px;
   margin-right: 60px;

@@ -10,7 +10,7 @@ const Card = ({ post }) => {
       <header className="cardHeader">
         <Carrousel images={post.photos} />
       </header>
-      <main className="cardBody px-4">
+      <main className="cardBody">
         <div className="cardBodyContent">
           <p className="text-black">{post.title}</p>
         </div>

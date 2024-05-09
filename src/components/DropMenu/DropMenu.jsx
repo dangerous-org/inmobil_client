@@ -7,7 +7,7 @@ import {
 } from "@nextui-org/react";
 import authStore from "../../store/authStore";
 import utilStore from "../../store/utilStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const DropMenu = () => {
   const navigate = useNavigate();
@@ -15,10 +15,14 @@ const DropMenu = () => {
   const user = authStore((state) => state.user);
   const logOutUser = authStore((state) => state.logOutUser);
 
-  // const currentPath = utilStore((state) => state.currentPath);
   const dropMenuDisabled = utilStore((state) => state.dropMenuDisabled);
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const openModal = utilStore((state) => state.openModal);
+  const currentPath = utilStore((state) => state.currentPath);
+  const setCurrentPath = utilStore((state) => state.setCurrentPath);
+
+  const currentLocation = useLocation();
+  setCurrentPath(currentLocation.pathname);
 
   const handleAction = (key) => {
     switch (key) {
@@ -42,7 +46,7 @@ const DropMenu = () => {
   };
 
   return (
-    <div className="flex items-center gap-4 absolute right-6">
+    <div className="flex items-center gap-4 absolute right-10">
       <Dropdown placement="bottom-end" isDisabled={dropMenuDisabled}>
         <DropdownTrigger>
           <Avatar
@@ -77,6 +81,7 @@ const DropMenu = () => {
             key="newPost"
             textValue="New Post"
             color="none"
+            isReadOnly={currentPath != "/feed" ? true : false}
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
             New Post
