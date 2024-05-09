@@ -2,13 +2,14 @@ import { create } from "zustand";
 import { getUserProfileHttp } from "../api/userProfileHttp";
 const userProfileStore = create((set) => ({
   userProfile: [],
+  userProfilePosts: [],
   isProfileLoading: false,
   getUserProfile: async (userName) => {
     try {
       set(() => ({ isProfileLoading: true }));
       const response = await getUserProfileHttp(userName);
-      console.log(response);
-      set(() => ({ userProfile: response.data }));
+      set(() => ({ userProfile: response.data.UserProfile }));
+      set(() => ({ userProfilePosts: response.data.Posts }));
     } catch (error) {
       console.log(error);
     } finally {

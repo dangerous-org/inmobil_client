@@ -20,6 +20,7 @@ import Card from "../../components/Card/Card";
 import "./Feed.css";
 
 const FeedPage = () => {
+
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const isModalOpen = utilStore((state) => state.isModalOpen);
   const closeModal = utilStore((state) => state.closeModal);
@@ -29,7 +30,7 @@ const FeedPage = () => {
   const post = postStore((state) => state.post);
   const message = postStore((state) => state.message);
   const setMessage = postStore((state) => state.setMessage);
-  const isLoading = postStore((state) => state.isLoading);
+  const isPostsLoading = postStore((state)=>state.isPostsLoading);
 
   const user = authStore((state) => state.user);
 
@@ -83,11 +84,12 @@ const FeedPage = () => {
 
     const res = await createPost(formData);
     if (res?.status == 201) {
+      await getPosts();
       handleClose();
       setMessage(res.data.message);
     }
   };
-
+console.log(post, ' feed posts');
   return (
     <div
       className={`w-screen h-screen flex flex-col overflow-x-hidden ${
@@ -95,9 +97,9 @@ const FeedPage = () => {
       }`}
     >
       <NavBar />
-      <main className="flex-1 pt-5">
-        <section className="w-[95%] gap-2 mx-auto flex justify-center flex-wrap mb-5">
-          {isLoading ? (
+      <main className="flex-1 mt-[70px] pt-5">
+        <section className="w-[95%] gap-x-4 gap-y-6 mx-auto flex justify-center flex-wrap mb-5">
+          {isPostsLoading ? (
             <p> loading </p>
           ) : (
             post?.map((post) => {
