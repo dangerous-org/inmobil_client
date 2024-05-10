@@ -11,7 +11,8 @@ export default {
       colors:{
         'redDefault': "#f56965",
         'lilaDefault': '#d69afc',
-        'whiteDefault': '#e6e6ed'
+        'whiteDefault': '#e6e6ed',
+        'default-black': '#18181b'
       }
     },
   },

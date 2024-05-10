@@ -2,7 +2,7 @@ const LocationIcon = (props) => {
   return (
     <svg
       viewBox="0 0 512 512"
-      fill="#d69afc"
+      fill="#7F8286"
       height="1.2em"
       width="1.2em"
       className="inline-block"
