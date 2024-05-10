@@ -39,9 +39,9 @@ const ProfilePage = () => {
         </aside>
         <section className="flex flex-col flex-1 ml-[25%]">
           <UserInfo />
-          <div className="flex flex-col flex-wrap flex-1 pl-[100px] mt-10 mb-5">
-            <h3 className="text-2xl mt-4">Posts</h3>
-            <section className="flex flex-wrap gap-x-4 gap-y-8 mt-8"> 
+          <div className="flex justify-center flex-col flex-wrap flex-1 mt-10 mb-5">
+            <h3 className="text-2xl mt-4 pl-[100px]">Posts</h3>
+            <section className="w-full flex justify-center flex-wrap gap-x-4 gap-y-8 mt-8"> 
               {userProfilePosts.map((post) => {
                 return <Card key={post._id} post={post} />;
               })}
