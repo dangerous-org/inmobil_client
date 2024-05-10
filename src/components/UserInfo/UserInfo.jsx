@@ -1,6 +1,7 @@
 import LocationIcon from "../icons/LocationIcon";
 import { Avatar } from "@nextui-org/react";
 import userProfileStore from "../../store/userProfile.store";
+import UserInfoSkeleton from "./UserInfo-Skeleton";
 import "./UserInfo.css";
 
 export const UserInfo = () => {
@@ -9,7 +10,7 @@ export const UserInfo = () => {
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
 
   return isProfileLoading ? (
-    <p>Loading ...</p>
+    <UserInfoSkeleton/>
   ) : (
     <section className="user-info-container">
       <Avatar src={userProfile.picture} size="lg" isBordered alt="xdd"></Avatar>
