@@ -89,7 +89,7 @@ const FeedPage = () => {
       setMessage(res.data.message);
     }
   };
-console.log(post, ' feed posts');
+
   return (
     <div
       className={`w-screen h-screen flex flex-col overflow-x-hidden ${
@@ -99,13 +99,15 @@ console.log(post, ' feed posts');
       <NavBar />
       <main className="flex-1 mt-[70px] pt-5">
         <section className="w-[95%] gap-x-4 gap-y-6 mx-auto flex justify-center flex-wrap mb-5">
-          {isPostsLoading ? (
+          <section className="card-container">
+            {isPostsLoading ? (
             <p> loading </p>
           ) : (
             post?.map((post) => {
               return <Card key={post._id} post={post} />;
             })
           )}
+          </section>
         </section>
         <Modal
           title={"Create a new post"}

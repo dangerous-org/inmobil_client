@@ -5,7 +5,6 @@ import NotFoundPage from "../pages/NotFoundPage/NotFound-Page";
 import ProtectedRoutes from "../helpers/ProtectedRoutes";
 import FeedPage from "../pages/feed/Feed-Page";
 import ProfilePage from "../pages/User/Profile/Profile-Page";
-import UserInformation from "../pages/User/UserInformation";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -13,12 +12,7 @@ const AppRoutes = () => {
       <Route path="/auth/sign-up" element={<SignUpPage />}></Route>
       <Route path="/auth/sign-in" element={<SignInPage />}></Route>
       <Route path="/:userName" element={<ProfilePage />}></Route>
-      <Route element={<ProtectedRoutes />}>
-        <Route
-          path="/:userName/information"
-          element={<UserInformation />}
-        ></Route>
-      </Route>
+      <Route element={<ProtectedRoutes />}></Route>
       <Route path="*" element={<NotFoundPage />}></Route>
     </Routes>
   );

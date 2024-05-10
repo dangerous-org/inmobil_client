@@ -5,7 +5,7 @@
 }
 
 .navbarHeader {
-  width: calc(100% - 17px);
+  width: calc(100% - 20px);
   height: 70px;
   position: fixed;
   z-index: 100;

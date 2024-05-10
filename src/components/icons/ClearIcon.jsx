@@ -8,8 +8,8 @@ const ClearIcon = ({ handleClear }) => {
       className="cursor-pointer"
       onClick={handleClear}
     >
-      <path d="M8 8L16 16" stroke="#d69afc" strokeWidth="2" />
-      <path d="M16 8L8 16" stroke="#d69afc" strokeWidth="2" />
+      <path d="M8 8L16 16" stroke="#7F8286" strokeWidth="2" />
+      <path d="M16 8L8 16" stroke="#7F8286" strokeWidth="2" />
     </svg>
   );
 };

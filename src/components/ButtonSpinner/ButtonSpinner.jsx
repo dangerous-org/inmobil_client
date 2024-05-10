@@ -8,7 +8,7 @@ const ButtonSpinner = ({ text }) => {
   ) : (
     <button
       type="submit"
-      className="w-full h-11 bg-lilaDefault text-white rounded-md"
+      className="w-full h-11 bg-default-black text-white rounded-md"
     >
       {text}
     </button>
