@@ -4,13 +4,15 @@ import { UserInfo } from "../../../components/UserInfo/UserInfo";
 import { useParams } from "react-router-dom";
 import Card from "../../../components/Card/Card";
 import userProfileStore from "../../../store/userProfile.store";
-import './Profile.css'
-// import authStore from "../../../store/authStore";
+import authStore from "../../../store/authStore";
+import "./Profile.css";
+import ModalProfile from "../../../components/ModalProfile/ModalProfile";
+
 const ProfilePage = () => {
   const { userName } = useParams();
 
-  // const user = authStore((state) => state.user);
-  // const userProfile = userProfileStore((state) => state.userProfile);
+  const user = authStore((state) => state.user);
+  const userProfile = userProfileStore((state) => state.userProfile);
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
   const userProfilePosts = userProfileStore((state) => state.userProfilePosts);
 
@@ -20,7 +22,7 @@ const ProfilePage = () => {
     };
     http();
   }, [getUserProfile, userName]);
-  
+
   return (
     <div className="w-screen h-screen flex flex-col overflow-x-hidden ">
       <NavBar /> *
@@ -32,10 +34,14 @@ const ProfilePage = () => {
               <span>Seguidos</span>
             </div>
             <div className="flex flex-1 items-center justify-around">
-              <button className="px-4 py-2 rounded-md text-white bg-[#18181b]">
+              <button className="px-4 py-2 rounded-md text-white bg-default-black">
                 Seguir
               </button>
-              
+              {userProfile.user != undefined &&
+              user != undefined &&
+              userProfile.user._id == user._id ? (
+                <ModalProfile />
+              ) : null}
             </div>
           </div>
           <div className="flex flex-1 justify-center">

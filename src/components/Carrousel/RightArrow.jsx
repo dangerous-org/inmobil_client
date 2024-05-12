@@ -3,10 +3,14 @@ import RightArrowIcon from "./svg/RightArrowIcon";
 import "./Carrousel.css";
 const RightArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
   const handleClick = () => {
+    if (currentImgIndex === imagesLength - 1) {
+      setCurrentImgIndex(0);
+      return;
+    }
     setCurrentImgIndex(currentImgIndex + 1);
   };
 
-  return currentImgIndex === imagesLength - 1 ? null : (
+  return (
     <button className="rightArrowButton" onClick={handleClick}>
       <RightArrowIcon />
     </button>

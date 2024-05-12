@@ -46,14 +46,14 @@ const DropMenu = () => {
   };
 
   return (
-    <div className="flex items-center gap-4 absolute right-10">
+    <div className="flex items-center gap-4 absolute right-6">
       <Dropdown placement="bottom-end" isDisabled={dropMenuDisabled}>
         <DropdownTrigger>
           <Avatar
             isBordered
             as="button"
             className="transition-transform"
-            src="https://i.pinimg.com/564x/da/4c/31/da4c31567bb5dae43982c181bf1f11f7.jpg"
+            src={user && user.picture}
           />
         </DropdownTrigger>
         <DropdownMenu
@@ -93,14 +93,6 @@ const DropMenu = () => {
             className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
           >
             Profile
-          </DropdownItem>
-          <DropdownItem
-            key="userInformation"
-            textValue="Personal Information"
-            color="none"
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
-          >
-            Personal Information
           </DropdownItem>
           <DropdownItem
             key="settings"

@@ -26,19 +26,19 @@
   margin: 0 auto;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
   .card-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1075px) {
   .card-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .card-container {
     grid-template-columns: repeat(1, 1fr);
   }
