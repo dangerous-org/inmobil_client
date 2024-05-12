@@ -6,14 +6,16 @@
   margin: 40px auto;
 }
 
-@media (max-width: 1300px) {
+
+
+@media (max-width: 1400px) {
   .card-container-profile {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 850px) {
+ @media (max-width: 1024px) {
   .card-container-profile {
     grid-template-columns: repeat(1, 1fr);
   }
-}
+} 
