@@ -1,21 +1,22 @@
 export const typeOffers = [
-  { label: "Sell", value: "sell" },
-  { label: "Rent", value: "rent" },
+  { label: "Sell", value: "Sell" },
+  { label: "Rent", value: "Rent" },
 ];
 
 export const status = [
-  { label: "New", value: "new" },
-  { label: "Excellent condition", value: "excellent condition" },
-  { label: "Good condition", value: "good condition" },
-  { label: "To renew", value: "to renew" },
+  { label: "New", value: "New" },
+  { label: "Excellent condition", value: "Excellent condition" },
+  { label: "Good condition", value: "Good condition" },
+  { label: "To renew", value: "To renew" },
 ];
 
 export const typeEstates = [
-  { label: "Residential", value: "residential" },
-  { label: "Commercial", value: "commercial" },
-  { label: "Industrial", value: "industrial" },
-  { label: "Land", value: "land" },
-  { label: "Rural", value: "rural" },
-  { label: "Recreational", value: "recreational" },
-  { label: "Institutional", value: "institutional" }
+  { label: "Apartment", value: "Apartment" },
+  { label: "Studio Apartment", value: "Studio Apartment" },
+  { label: "House", value: "House" },
+  { label: "Estate", value: "Estate" },
+  { label: "Room", value: "Room" },
+  { label: "Office", value: "Office" },
+  { label: "Local", value: "Local" },
+  { label: "Building", value: "Building" }
 ];

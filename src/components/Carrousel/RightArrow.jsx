@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import RightArrowIcon from "./svg/RightArrowIcon";
 import "./Carrousel.css";
 const RightArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
-  const handleClick = () => {
+  const handleClick = (evt) => {
+    evt.stopPropagation();
     if (currentImgIndex === imagesLength - 1) {
       setCurrentImgIndex(0);
       return;
@@ -10,7 +11,7 @@ const RightArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
     setCurrentImgIndex(currentImgIndex + 1);
   };
 
-  return (
+  return imagesLength == 1 ? null : (
     <button className="rightArrowButton" onClick={handleClick}>
       <RightArrowIcon />
     </button>

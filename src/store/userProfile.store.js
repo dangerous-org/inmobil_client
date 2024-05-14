@@ -7,6 +7,7 @@ const userProfileStore = create((set) => ({
   userProfile: [],
   userProfilePosts: [],
   isProfileLoading: false,
+  userProfileMessage: null,
   getUserProfile: async (userName) => {
     try {
       set(() => ({ isProfileLoading: true }));
@@ -15,6 +16,7 @@ const userProfileStore = create((set) => ({
       set(() => ({ userProfilePosts: response.data.Posts }));
     } catch (error) {
       console.log(error);
+      set(() => ({ userProfileMessage: error.response.data.message }));
     } finally {
       set(() => ({ isProfileLoading: false }));
     }
@@ -26,9 +28,13 @@ const userProfileStore = create((set) => ({
       console.log(response);
     } catch (error) {
       console.log(error);
+      set(() => ({ userProfileMessage: error.response.data.message }));
     } finally {
       set(() => ({ isProfileLoading: false }));
     }
+  },
+  setUserProfileMessage: (status) => {
+    set(() => ({ userProfileMessage: status }));
   },
 }));
 

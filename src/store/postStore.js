@@ -1,11 +1,12 @@
 import { create } from "zustand";
-import { getPosts, createPost } from "../api/postHttp";
+import { getPosts, getPostById, createPost } from "../api/postHttp";
 
 const postStore = create((set) => ({
   isLoading: false,
   isPostsLoading: false,
   post: null,
   message: null,
+  postSelected: [],
   createPost: async (data) => {
     try {
       set(() => ({ isLoading: true }));
@@ -28,6 +29,15 @@ const postStore = create((set) => ({
       set(() => ({ message: error.response.data.message }));
     } finally {
       set(() => ({ isPostsLoading: false }));
+    }
+  },
+  getPostById: async (postId) => {
+    try {
+      const response = await getPostById(postId);
+      console.log(response);
+      set(() => ({ postSelected: response.data }));
+    } catch (error) {
+      set(() => ({ message: error.response.data.message }));
     }
   },
   setMessage: (error) => {
