@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { Divider } from "@nextui-org/react";
 import "./Modal.css";
 const Modal = ({
   isOpen,
@@ -28,12 +27,11 @@ const Modal = ({
         style={styles}
       >
         <header className="modal-header">
-          {title && <p className="modal-title">{title}</p>}
+          {title && <p className="modal-title text-xl font-semibold">{title}</p>}
           <button onClick={onClose} className="close-button">
             Close
           </button>
         </header>
-        <Divider />
         {children}
       </motion.div>
     </AnimatePresence>

@@ -73,7 +73,7 @@ const DropMenu = () => {
             key="home"
             textValue="Home"
             color="none"
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+            className="hover:bg-[#eeeeef] transition-all duration-200"
           >
             Home
           </DropdownItem>
@@ -82,7 +82,7 @@ const DropMenu = () => {
             textValue="New Post"
             color="none"
             isReadOnly={currentPath != "/feed" ? true : false}
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+            className="hover:bg-[#eeeeef] transition-all duration-200"
           >
             New Post
           </DropdownItem>
@@ -90,7 +90,7 @@ const DropMenu = () => {
             key="profile"
             textValue="Profile"
             color="none"
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+            className="hover:bg-[#eeeeef] transition-all duration-200"
           >
             Profile
           </DropdownItem>
@@ -98,7 +98,7 @@ const DropMenu = () => {
             key="settings"
             textValue="Settings"
             color="none"
-            className="hover:bg-lilaDefault hover:text-white transition-all duration-200"
+            className="hover:bg-[#eeeeef] transition-all duration-200"
           >
             Settings
           </DropdownItem>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   Modal,
   ModalContent,
@@ -18,14 +19,19 @@ import authStore from "../../store/authStore";
 
 const ModalProfile = () => {
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
-
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const user = authStore((state) => state.user);
-
+  const userProfileMessage = userProfileStore(
+    (state) => state.userProfileMessage
+  );
+  const setUserProfileMessage = userProfileStore(
+    (state) => state.setUserProfileMessage
+  );
   const updateUserProfile = userProfileStore(
     (state) => state.updateeUserProfile
   );
+
+  const user = authStore((state) => state.user);
+
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const {
     handleChangeFiles,
@@ -56,8 +62,15 @@ const ModalProfile = () => {
     formData.append("birthDate", moment(date).format());
     formData.append("picture", photos[0]);
     const response = await updateUserProfile(formData, user._id);
+    if (response.status == 200) {
       clearForm();
       onOpenChange(!onOpen);
+    }
+  };
+
+  const handleCloseModal = () => {
+    onOpenChange();
+    setUserProfileMessage(null);
   };
 
   return (
@@ -71,7 +84,7 @@ const ModalProfile = () => {
       </button>
       <Modal
         isOpen={isOpen}
-        onOpenChange={onOpenChange}
+        onOpenChange={handleCloseModal}
         placement="top-center"
         size="3xl"
         isDismissable={false}
@@ -164,7 +177,9 @@ const ModalProfile = () => {
                   </Button>
                 </form>
               </ModalBody>
-              <ModalFooter></ModalFooter>
+              <ModalFooter className="h-6 flex justify-center items-center">
+                <p>{userProfileMessage && userProfileMessage}</p>
+              </ModalFooter>
             </>
           )}
         </ModalContent>
