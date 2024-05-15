@@ -108,11 +108,11 @@ const FeedPage = () => {
           isOpen={isModalOpen}
           onClose={handleClose}
           width={"880"}
-          height={"530"}
+          height={"490"}
         >
-          <form onSubmit={handleSubmit} className="p-6">
+          <form onSubmit={handleSubmit} className="px-6 py-2">
             <section className="w-full flex flex-col">
-              <div className="flex gap-2">
+              <div className="flex gap-1">
                 <Input
                   size="sm"
                   type="text"
@@ -135,7 +135,7 @@ const FeedPage = () => {
               <Textarea
                 label="Description"
                 placeholder="Enter your description"
-                className="w-full mt-4"
+                className="w-full mt-2"
                 name="description"
                 variant="bordered"
                 value={data.description}
@@ -143,7 +143,7 @@ const FeedPage = () => {
                 onChange={handleChange}
               />
             </section>
-            <section className="w-full flex mt-4 justify-between gap-2">
+            <section className="w-full flex mt-2 justify-between gap-1">
               <Input
                 size="sm"
                 type="text"
@@ -164,7 +164,7 @@ const FeedPage = () => {
                 onChange={handleDateChange}
               />
             </section>
-            <section className="flex gap-2 mt-4">
+            <section className="flex gap-1 mt-2">
               <Select
                 size="sm"
                 label="Type Offer"
@@ -196,7 +196,7 @@ const FeedPage = () => {
                 ))}
               </Select>
             </section>
-            <section className="flex gap-2 mt-4 h-[120px]">
+            <section className="flex gap-1 mt-2 h-[120px]">
               <div className="flex-1 ">
                 <FileUploader
                   name="photos"
@@ -226,7 +226,7 @@ const FeedPage = () => {
                 <ButtonSpinner text="Create Post" />
               </div>
             </section>
-            {message && <p className="text-center mt-3 ">{message}</p>}
+            {message && <p className="text-center mt-3">{message}</p>}
           </form>
         </Modal>
       </main>

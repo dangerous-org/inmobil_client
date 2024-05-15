@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import LocationIcon from "../icons/LocationIcon";
 import User from "../User/User";
 import "./Card.css";
+import userProfileStore from "../../store/userProfile.store";
 
 const Card = ({ post }) => {
   const navigate = useNavigate();
-  
+
+  const userProfile = userProfileStore((state) => state.userProfile);
 
   const handleClick = () => {
     navigate(`/post?id=${post._id}`);
@@ -22,7 +24,10 @@ const Card = ({ post }) => {
         <div className="cardBodyContent">
           <p className="text-black font-semibold">{post.title}</p>
         </div>
-        <User userData={post.userData} userProfileData={post.userProfileData} />
+        <User
+          userData={post.userData || userProfile.user}
+          userProfileData={post.userProfileData || userProfile}
+        />
       </main>
       <footer className="cardFooter">
         <strong>${new Intl.NumberFormat("es-CO").format(post.price)}</strong>

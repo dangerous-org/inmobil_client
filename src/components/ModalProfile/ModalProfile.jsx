@@ -16,6 +16,7 @@ import { FileUploader } from "react-drag-drop-files";
 import useFormMultiPart from "../../hooks/useFormMultiPart";
 import userProfileStore from "../../store/userProfile.store";
 import authStore from "../../store/authStore";
+import filetypes from "../../data/fileTypes";
 
 const ModalProfile = () => {
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
@@ -162,9 +163,9 @@ const ModalProfile = () => {
                     />
                     <FileUploader
                       name="picture"
-                      multiple
                       classes="dragFile"
-                      label="Upload photos"
+                      label="Upload your picture"
+                      types={filetypes}
                       handleChange={(files) => handleChangeFiles(files)}
                     />
                   </div>
