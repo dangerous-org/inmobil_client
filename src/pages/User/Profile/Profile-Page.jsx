@@ -18,8 +18,6 @@ const ProfilePage = () => {
   const isProfileUpdated = userProfileStore((state) => state.isProfileUpdated);
   const userProfilePosts = userProfileStore((state) => state.userProfilePosts);
 
-  console.log(userProfilePosts);
-
   useEffect(() => {
     const http = async () => {
       await getUserProfile(userName);

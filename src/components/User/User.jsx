@@ -8,9 +8,6 @@ const User = ({ userData, userProfileData }) => {
     picture = userProfileData.picture;
   }
 
-  console.log(userData);
-  console.log(userProfileData);
-
   return (
     <Link
       to={`/${userData && userData.userName}`}
