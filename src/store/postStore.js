@@ -34,7 +34,6 @@ const postStore = create((set) => ({
   getPostById: async (postId) => {
     try {
       const response = await getPostById(postId);
-      console.log(response);
       set(() => ({ postSelected: response.data }));
     } catch (error) {
       set(() => ({ message: error.response.data.message }));
