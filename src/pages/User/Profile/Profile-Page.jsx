@@ -12,7 +12,7 @@ const ProfilePage = () => {
   const { userName } = useParams();
 
   const user = authStore((state) => state.user);
-  
+
   const userProfile = userProfileStore((state) => state.userProfile);
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
   const isProfileUpdated = userProfileStore((state) => state.isProfileUpdated);

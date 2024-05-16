@@ -12,6 +12,7 @@ const userProfileStore = create((set) => ({
     try {
       set(() => ({ isProfileLoading: true }));
       const response = await getUserProfileHttp(userName);
+      console.log(response.data.UserProfile);
       set(() => ({ userProfile: response.data.UserProfile }));
       set(() => ({ userProfilePosts: response.data.Posts }));
     } catch (error) {
@@ -25,7 +26,7 @@ const userProfileStore = create((set) => ({
     try {
       set(() => ({ isProfileLoading: true }));
       const response = await updateUserProfileHttp(userData, userId);
-      console.log(response);
+      return response;
     } catch (error) {
       console.log(error);
       set(() => ({ userProfileMessage: error.response.data.message }));
