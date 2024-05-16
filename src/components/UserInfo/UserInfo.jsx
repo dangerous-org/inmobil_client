@@ -13,7 +13,7 @@ export const UserInfo = () => {
     <UserInfoSkeleton/>
   ) : (
     <section className="user-info-container">
-      <Avatar src={userProfile.picture} size="lg" isBordered alt="xdd"></Avatar>
+      <Avatar src={userProfile.picture} size="lg" isBordered alt="picture"></Avatar>
       <div className="ml-4">
         <h2 className="text-xl font-semibold text-gray-900">
           {userProfile.names + ' ' + userProfile.lastName || "No name"}

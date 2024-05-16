@@ -20,12 +20,17 @@ import filetypes from "../../data/fileTypes";
 
 const ModalProfile = () => {
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
+
+  const userProfile = userProfileStore((state)=>state.userProfile);
+
   const userProfileMessage = userProfileStore(
     (state) => state.userProfileMessage
   );
+
   const setUserProfileMessage = userProfileStore(
     (state) => state.setUserProfileMessage
   );
+
   const updateUserProfile = userProfileStore(
     (state) => state.updateeUserProfile
   );
@@ -43,12 +48,12 @@ const ModalProfile = () => {
     photos,
     date,
   } = useFormMultiPart({
-    names: "",
-    lastName: "",
-    dni: "",
-    phoneNumber: "",
-    location: "",
-    biography: "",
+    names: userProfile.names,
+    lastName: userProfile.lastName,
+    dni: userProfile.dni,
+    phoneNumber: userProfile.phoneNumber,
+    location: userProfile.location,
+    biography: userProfile.biography,
   });
 
   const handleSubmit = async (evt) => {
@@ -62,15 +67,17 @@ const ModalProfile = () => {
     formData.append("biography", data.biography);
     formData.append("birthDate", moment(date).format());
     formData.append("picture", photos[0]);
+
     const response = await updateUserProfile(formData, user._id);
+
     if (response.status == 200) {
       clearForm();
-      onOpenChange(!onOpen);
+      onOpenChange(!isOpen);
     }
   };
 
   const handleCloseModal = () => {
-    onOpenChange();
+    onOpenChange(!isOpen);
     setUserProfileMessage(null);
   };
 
@@ -106,6 +113,7 @@ const ModalProfile = () => {
                       variant="bordered"
                       size="lg"
                       onChange={handleChange}
+                      value={data && data.names}
                     />
                     <Input
                       type="text"
@@ -114,6 +122,7 @@ const ModalProfile = () => {
                       variant="bordered"
                       size="lg"
                       onChange={handleChange}
+                      value={data && data.lastName}
                     />
                   </div>
                   <div className="flex gap-2">
@@ -124,6 +133,7 @@ const ModalProfile = () => {
                       variant="bordered"
                       size="lg"
                       onChange={handleChange}
+                      value={data && data.dni}
                     />
                     <Input
                       type="text"
@@ -132,6 +142,7 @@ const ModalProfile = () => {
                       variant="bordered"
                       size="lg"
                       onChange={handleChange}
+                      value={data && data.phoneNumber}
                     />
                   </div>
                   <div className="flex gap-2">
@@ -142,6 +153,7 @@ const ModalProfile = () => {
                       variant="bordered"
                       size="lg"
                       onChange={handleChange}
+                      value={data && data.location}
                     />
                     <DatePicker
                       name="birthDate"
@@ -160,9 +172,11 @@ const ModalProfile = () => {
                       className="max-w-md"
                       variant="bordered"
                       onChange={handleChange}
+                      value={data && data.biography}
                     />
                     <FileUploader
                       name="picture"
+                      multiple
                       classes="dragFile"
                       label="Upload your picture"
                       types={filetypes}
