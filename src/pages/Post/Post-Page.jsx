@@ -7,6 +7,7 @@ import ImagesGrid from "../../components/ImagesGrid/ImagesGrid";
 import BuildingIcon from "../../components/icons/BuildingIcon";
 import CalendarIcon from "../../components/icons/CalendarIcon";
 import moment from "moment";
+import OfferIcon from "../../components/icons/Offer";
 
 const PostPage = () => {
   const [searchParam] = useSearchParams();
@@ -37,22 +38,37 @@ const PostPage = () => {
             <p className="text-[#6d7482]">
               {postSelected && postSelected.description}
             </p>
-            <LocationIcon />
-            <span className="text-[#6d7482]">
-              {postSelected && postSelected.location}
-            </span>
-            <div className="flex">
+            <div className="flex gap-x-2">
+              <LocationIcon />
+              <span className="text-[#6d7482]">
+                {postSelected && postSelected.location}
+              </span>
+            </div>
+            <div className="flex gap-x-2">
               <CalendarIcon />
               <span className="text-[#6d7482]">
                 Built at{" "}
                 {postSelected &&
-                  moment(postSelected.builtDate).format("MMM Do YYYY")}
+                  moment(postSelected.builtDate).format("LL")}
               </span>
             </div>
-            <div className="flex">
+            <div className="flex gap-x-2">
               <BuildingIcon />
               <span className="text-[#6d7482]">
                 {postSelected && postSelected.typeEstate}
+              </span>
+            </div>
+            <div className="flex gap-x-2">
+              <OfferIcon />
+              <span className="text-[#6d7482]">
+                {postSelected && postSelected.typeOffer}
+              </span>
+            </div>
+            <div className="flex gap-x-2">
+              <CalendarIcon />
+              <span className="text-[#6d7482]">
+                Posted On{" "}
+                {postSelected && moment(postSelected.createAt).fromNow()}
               </span>
             </div>
           </div>
