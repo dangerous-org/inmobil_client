@@ -4,7 +4,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding-left: 55px;
+  padding-left: 128px;
   gap: 60px;
 }
 
@@ -17,8 +17,8 @@
 
 
 .skeleton-avatar {
-  height: 60px;
-  width: 60px;
+  height: 128px;
+  width: 128px;
   border-radius: 50%;
   background-color: #ccc;
   margin-right: 1rem;
@@ -34,6 +34,7 @@
   width: 200px;
   background-color: #ccc;
   margin-bottom: 5px;
+  margin-left: -16px;
 }
 
 .skeleton-username {
@@ -41,6 +42,7 @@
   width: 100px;
   background-color: #ccc;
   margin-bottom: 5px;
+  margin-left: -16px;
 }
 
 .skeleton-biography {
@@ -48,12 +50,14 @@
   width: 300px;
   background-color: #ccc;
   margin-bottom: 5px;
+  margin-left: -16px;
 }
 
 .skeleton-location {
   height: 22px;
   width: 150px;
   background-color: #ccc;
+  margin-left: -16px;
 }
 
 .skeleton-avatar,
