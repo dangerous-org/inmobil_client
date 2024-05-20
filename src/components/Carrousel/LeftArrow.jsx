@@ -4,7 +4,9 @@ import "./Carrousel.css";
 const LeftArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
 
   const handleClick = (evt) => {
+    
     evt.stopPropagation();
+    
     if (currentImgIndex === 0) {
       setCurrentImgIndex(imagesLength - 1);
       return;

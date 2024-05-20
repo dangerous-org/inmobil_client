@@ -74,7 +74,7 @@ const ProfilePage = () => {
         <section className="flex flex-col flex-1 max-w-3/4 ml-[25.5%]">
           <UserInfo />
           <div className="flex justify-center flex-col flex-wrap flex-1 mt-10 mb-5">
-            <h3 className="text-2xl mt-6 pl-[128px]">Posts</h3>
+            <h3 className="text-2xl mt-6 pl-[80px]">Posts</h3>
             <section className="card-container-profile">
               {isProfileLoading ? (
                 <>

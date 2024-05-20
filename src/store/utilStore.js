@@ -4,6 +4,8 @@ const utilStore = create((set) => ({
   isModalOpen: false,
   dropMenuDisabled: false,
   currentPath: "",
+  selectedImages: [],
+  indexImg: null,
   openModal: () => {
     set(() => ({ isModalOpen: true }));
   },
@@ -15,6 +17,12 @@ const utilStore = create((set) => ({
   },
   setCurrentPath: (path) => {
     set(() => ({ currentPath: path }));
+  },
+  setSelectedImage: (image) => {
+    set(() => ({ selectedImages: image }));
+  },
+  setSelectedImageIndex: (index) => {
+    set(() => ({ indexImg: index }));
   },
 }));
 

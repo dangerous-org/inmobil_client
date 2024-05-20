@@ -10,10 +10,34 @@
   height: 240px;
   object-fit: cover;
   border-radius: 10px;
+  position: relative;
 }
 
 #post-img {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+}
+
+#see-photos {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 10px;
+  z-index: 40;
+}
+
+.img-grid-skeleton {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.img-container-skeleton {
+  width: 360px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  background-color: #ccc;
 }

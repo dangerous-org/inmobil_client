@@ -33,10 +33,13 @@ const postStore = create((set) => ({
   },
   getPostById: async (postId) => {
     try {
+      set(() => ({ isPostsLoading: true }));
       const response = await getPostById(postId);
       set(() => ({ postSelected: response.data }));
     } catch (error) {
       set(() => ({ message: error.response.data.message }));
+    }finally{
+      set(() => ({ isPostsLoading: false }));
     }
   },
   setMessage: (error) => {

@@ -3,12 +3,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin: 40px 128px;
+  margin: 40px 80px;
 }
 
 
 
-@media (max-width: 1400px) {
+@media (max-width: 1485px) {
   .card-container-profile {
     grid-template-columns: repeat(2, 1fr);
   }
