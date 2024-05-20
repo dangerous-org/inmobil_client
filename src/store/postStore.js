@@ -4,7 +4,7 @@ import { getPosts, getPostById, createPost } from "../api/postHttp";
 const postStore = create((set) => ({
   isLoading: false,
   isPostsLoading: false,
-  post: null,
+  post: [],
   message: null,
   postSelected: [],
   createPost: async (data) => {
@@ -21,8 +21,8 @@ const postStore = create((set) => ({
   },
   getPosts: async () => {
     try {
-      const response = await getPosts();
       set(() => ({ isPostsLoading: true }));
+      const response = await getPosts();
       set(() => ({ post: response.data }));
       return response;
     } catch (error) {

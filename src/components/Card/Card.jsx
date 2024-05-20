@@ -3,8 +3,8 @@ import Carrousel from "../Carrousel/Carrousel";
 import { useNavigate } from "react-router-dom";
 import LocationIcon from "../icons/LocationIcon";
 import User from "../User/User";
-import "./Card.css";
 import userProfileStore from "../../store/userProfile.store";
+import "./Card.css";
 
 const Card = ({ post }) => {
   const navigate = useNavigate();

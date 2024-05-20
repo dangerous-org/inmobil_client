@@ -1,6 +1,12 @@
 import { FileUploader } from "react-drag-drop-files";
 import Modal from "../../components/Modal/Modal";
-import { Input, Textarea, Select, SelectItem, DatePicker } from "@nextui-org/react";
+import {
+  Input,
+  Textarea,
+  Select,
+  SelectItem,
+  DatePicker,
+} from "@nextui-org/react";
 import NavBar from "../../components/NavBar/NavBar";
 import { status, typeEstates, typeOffers } from "../../data/selectData";
 import useFormMultiPart from "../../hooks/useFormMultiPart";
@@ -12,10 +18,10 @@ import postStore from "../../store/postStore";
 import { useEffect } from "react";
 import filetypes from "../../data/fileTypes";
 import Card from "../../components/Card/Card";
+import CardSkeleton from "../../components/Card/CardSkeleton";
 import "./Feed.css";
 
 const FeedPage = () => {
-
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const isModalOpen = utilStore((state) => state.isModalOpen);
   const closeModal = utilStore((state) => state.closeModal);
@@ -87,15 +93,21 @@ const FeedPage = () => {
 
   return (
     <div
-      className={`w-screen h-screen flex flex-col overflow-x-hidden ${isModalOpen ? "modal-open" : ""
-        }`}
+      className={`w-screen h-screen flex flex-col overflow-x-hidden ${
+        isModalOpen ? "modal-open" : ""
+      }`}
     >
       <NavBar />
       <main className="flex-1 mt-[70px] pt-5">
         <section className="w-[95%] gap-x-4 gap-y-6 mx-auto flex justify-center flex-wrap mb-5">
           <section className="card-container">
             {isPostsLoading ? (
-              <p> loading </p>
+              <>
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+              </>
             ) : (
               post?.map((post) => {
                 return <Card key={post._id} post={post} />;

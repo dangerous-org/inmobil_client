@@ -7,6 +7,7 @@ import userProfileStore from "../../../store/userProfile.store";
 import authStore from "../../../store/authStore";
 import "./Profile.css";
 import ModalProfile from "../../../components/ModalProfile/ModalProfile";
+import CardSkeleton from "../../../components/Card/CardSkeleton";
 
 const ProfilePage = () => {
   const { userName } = useParams();
@@ -15,8 +16,14 @@ const ProfilePage = () => {
 
   const userProfile = userProfileStore((state) => state.userProfile);
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
-  const isProfileUpdated = userProfileStore((state) => state.isProfileUpdated);
   const userProfilePosts = userProfileStore((state) => state.userProfilePosts);
+
+  const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
+  const isProfileUpdated = userProfileStore((state) => state.isProfileUpdated);
+
+  const resetProfileUpdated = userProfileStore(
+    (state) => state.resetProfileUpdated
+  );
 
   useEffect(() => {
     const http = async () => {
@@ -26,13 +33,14 @@ const ProfilePage = () => {
   }, [getUserProfile, userName]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (isProfileUpdated) {
-        await getUserProfile();
-      }
-    };
-    fetchData();
-  }, [isProfileUpdated, getUserProfile]);
+    if (isProfileUpdated) {
+      const fetchData = async () => {
+        await getUserProfile(userName);
+      };
+      fetchData();
+      resetProfileUpdated(false);
+    }
+  }, [isProfileUpdated, getUserProfile, resetProfileUpdated, userName]);
 
   return (
     <div className="w-screen h-screen flex flex-col overflow-x-hidden">
@@ -66,11 +74,25 @@ const ProfilePage = () => {
         <section className="flex flex-col flex-1 max-w-3/4 ml-[25.5%]">
           <UserInfo />
           <div className="flex justify-center flex-col flex-wrap flex-1 mt-10 mb-5">
-            <h3 className="text-2xl mt-4 pl-[100px]">Posts</h3>
+            <h3 className="text-2xl mt-6 pl-[128px]">Posts</h3>
             <section className="card-container-profile">
-              {userProfilePosts.map((post) => {
-                return <Card key={post._id} post={post} />;
-              })}
+              {isProfileLoading ? (
+                <>
+                  <CardSkeleton />
+                  <CardSkeleton />
+                  <CardSkeleton />
+                </>
+              ) : (
+                userProfilePosts.map((post) => {
+                  return (
+                    <Card
+                      key={post._id}
+                      post={post}
+                      isLoading={isProfileLoading}
+                    />
+                  );
+                })
+              )}
             </section>
           </div>
         </section>

@@ -21,7 +21,7 @@ import filetypes from "../../data/fileTypes";
 const ModalProfile = () => {
   const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
 
-  const userProfile = userProfileStore((state)=>state.userProfile);
+  const userProfile = userProfileStore((state) => state.userProfile);
 
   const userProfileMessage = userProfileStore(
     (state) => state.userProfileMessage
@@ -73,6 +73,7 @@ const ModalProfile = () => {
     if (response.status == 200) {
       clearForm();
       onOpenChange(!isOpen);
+      setUserProfileMessage(null);
     }
   };
 
