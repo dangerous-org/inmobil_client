@@ -1,11 +1,15 @@
-import SearchIcon from "../icons/SearchIcon";
-import ClearIcon from "../icons/ClearIcon";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback } from "react";
 import { debounce } from "lodash";
+import { useLocation } from "react-router-dom";
+import SearchIcon from "../icons/SearchIcon";
+import ClearIcon from "../icons/ClearIcon";
 import postStore from "../../store/postStore";
 import "./searchInput.css";
 
 const SearchInput = () => {
+  const currentPath = useLocation();
+
   const getPostFiltered = postStore((state) => state.getPostFiltered);
 
   const [search, setSearch] = useState("");
@@ -42,6 +46,7 @@ const SearchInput = () => {
         id="searchInput"
         onChange={handleChange}
         value={search}
+        disabled={currentPath.pathname != "/feed" ? true : false}
       />
       <ClearIcon handleClear={handleClear} />
     </div>

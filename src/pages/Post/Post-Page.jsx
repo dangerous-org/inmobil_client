@@ -56,13 +56,14 @@ const PostPage = () => {
           isOpen={isModalOpen}
           title="Photos"
           width={"900"}
-          height={"520"}
+          height={"530"}
           onClose={handleCloseModal}
         >
           <div className="w-full h-[87%] mt-1">
             <Carrousel
               images={selectedImages}
               index={SelectedImageIndex != null ? SelectedImageIndex : 0}
+              footerControl
             />
           </div>
         </Modal>

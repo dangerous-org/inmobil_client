@@ -89,6 +89,7 @@ const ProfilePage = () => {
                       key={post._id}
                       post={post}
                       isLoading={isProfileLoading}
+                      options
                     />
                   );
                 })

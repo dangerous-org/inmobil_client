@@ -4,8 +4,9 @@ import LeftArrow from "./LeftArrow";
 import RightArrow from "./RightArrow";
 import CarrouselFooter from "./CarrouselFooter";
 import "./Carrousel.css";
+import FooterControl from "./FooterControl";
 
-const Carrousel = ({ images = [], index = 0 }) => {
+const Carrousel = ({ images = [], index = 0, footerControl = false }) => {
   const [currentImg, setCurrentImg] = useState(null);
   const [currentImgIndex, setCurrentImgIndex] = useState(index);
 
@@ -30,6 +31,12 @@ const Carrousel = ({ images = [], index = 0 }) => {
         currentImgIndex={currentImgIndex}
         imagesLength={images.length}
       />
+      {footerControl ? (
+        <FooterControl
+          images={images}
+          setCurrentImgIndex={setCurrentImgIndex}
+        />
+      ) : null}
     </figure>
   );
 };
@@ -38,5 +45,6 @@ export default Carrousel;
 
 Carrousel.propTypes = {
   images: PropTypes.array,
-  index: PropTypes.number
+  index: PropTypes.number,
+  footerControl: PropTypes.bool,
 };
