@@ -1,11 +1,17 @@
 import { create } from "zustand";
-import { getPosts, getPostById, createPost } from "../api/postHttp";
+import {
+  getPosts,
+  getPostById,
+  createPost,
+  getPostFilteredHttp,
+} from "../api/postHttp";
 
 const postStore = create((set) => ({
   isLoading: false,
   isPostsLoading: false,
   post: [],
   message: null,
+  postSearch: "",
   postSelected: [],
   createPost: async (data) => {
     try {
@@ -33,14 +39,31 @@ const postStore = create((set) => ({
   },
   getPostById: async (postId) => {
     try {
+      set(() => ({ isPostsLoading: true }));
       const response = await getPostById(postId);
       set(() => ({ postSelected: response.data }));
     } catch (error) {
       set(() => ({ message: error.response.data.message }));
+    } finally {
+      set(() => ({ isPostsLoading: false }));
     }
   },
   setMessage: (error) => {
     set(() => ({ message: error }));
+  },
+  getPostFiltered: async (filter) => {
+    try {
+      set(() => ({ isPostsLoading: true }));
+      const response = await getPostFilteredHttp(filter);
+      set(() => ({ post: response.data }));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      set(() => ({ isPostsLoading: false }));
+    }
+  },
+  setPostSearch: (state) => {
+    set(() => ({ postSearch: state }));
   },
 }));
 

@@ -11,7 +11,7 @@ const Modal = ({
 }) => {
   const styles = {
     width: `${width}px`,
-    height: `${height}px`, 
+    height: `${height}px`,
   };
 
   if (!isOpen) return null;
@@ -22,12 +22,14 @@ const Modal = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{duration: 0.4}}
+        transition={{ duration: 0.4 }}
         className={"modal-overlay bg-white"}
         style={styles}
       >
         <header className="modal-header">
-          {title && <p className="modal-title text-xl font-semibold">{title}</p>}
+          {title && (
+            <p className="modal-title text-xl font-semibold">{title}</p>
+          )}
           <button onClick={onClose} className="close-button">
             Close
           </button>

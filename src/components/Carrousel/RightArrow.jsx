@@ -2,7 +2,9 @@ import PropTypes from "prop-types";
 import RightArrowIcon from "./svg/RightArrowIcon";
 import "./Carrousel.css";
 const RightArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
+
   const handleClick = (evt) => {
+    
     evt.stopPropagation();
     if (currentImgIndex === imagesLength - 1) {
       setCurrentImgIndex(0);
