@@ -14,3 +14,8 @@ export const getPostById = async (postId) => {
   const response = await axiosConfig.get(`/posts/findbyid?id=${postId}`);
   return response;
 };
+
+export const getPostFilteredHttp = async (filter) => {
+  const response = await axiosConfig.get(`/posts/find?termino=${filter}`);
+  return response;
+};

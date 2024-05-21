@@ -7,6 +7,7 @@ import {
   SelectItem,
   DatePicker,
 } from "@nextui-org/react";
+import { useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import { status, typeEstates, typeOffers } from "../../data/selectData";
 import useFormMultiPart from "../../hooks/useFormMultiPart";
@@ -15,7 +16,6 @@ import moment from "moment";
 import authStore from "../../store/authStore";
 import utilStore from "../../store/utilStore";
 import postStore from "../../store/postStore";
-import { useEffect } from "react";
 import filetypes from "../../data/fileTypes";
 import Card from "../../components/Card/Card";
 import CardSkeleton from "../../components/Card/CardSkeleton";
@@ -99,6 +99,11 @@ const FeedPage = () => {
     >
       <NavBar />
       <main className="flex-1 mt-[70px] pt-5">
+        {post.length < 1 ? (
+          <div className="mt-[180px] mx-auto w-1/4 h-28 text-3xl flex justify-center items-center">
+            No posts
+          </div>
+        ) : null}
         <section className="w-[95%] gap-x-4 gap-y-6 mx-auto flex justify-center flex-wrap mb-5">
           <section className="card-container">
             {isPostsLoading ? (

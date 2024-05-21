@@ -4,6 +4,7 @@ import utilStore from "../../store/utilStore";
 import "./ImagesGrid.css";
 
 const ImagesGrid = ({ images = [] }) => {
+  
   let showedImages = images.slice(0, 4);
   const openModal = utilStore((state) => state.openModal);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
