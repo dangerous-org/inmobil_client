@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const utilStore = create((set) => ({
   isModalOpen: false,
+  isPostModalCarrouselOpen: false,
   dropMenuDisabled: false,
   currentPath: "",
   selectedImages: [],
@@ -24,6 +25,12 @@ const utilStore = create((set) => ({
   setSelectedImageIndex: (index) => {
     set(() => ({ indexImg: index }));
   },
+  openPostModal: ()=>{
+    set(() => ({ isPostModalCarrouselOpen: true }));
+  },
+  closePostModal: ()=>{
+    set(() => ({ isPostModalCarrouselOpen: false }));
+  }
 }));
 
 export default utilStore;

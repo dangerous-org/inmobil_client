@@ -8,6 +8,7 @@ const userProfileStore = create((set) => ({
   userProfile: [],
   userProfilePosts: [],
   isProfileLoading: false,
+  isProfileUpdating: false,
   isProfileUpdated: false,
   userProfileMessage: null,
   getUserProfile: async (userName) => {
@@ -25,7 +26,7 @@ const userProfileStore = create((set) => ({
   },
   updateeUserProfile: async (userData, userId) => {
     try {
-      set(() => ({ isProfileLoading: true }));
+      set(() => ({ isProfileUpdating: true }));
       const response = await updateUserProfileHttp(userData, userId);
       set(() => ({ userProfile: response.data, isProfileUpdated: true }));
       return response;
@@ -33,7 +34,7 @@ const userProfileStore = create((set) => ({
       console.log(error);
       set(() => ({ userProfileMessage: error.response.data.message }));
     } finally {
-      set(() => ({ isProfileLoading: false }));
+      set(() => ({ isProfileUpdating: false }));
     }
   },
   setUserProfileMessage: (status) => {

@@ -22,6 +22,7 @@ import CardSkeleton from "../../components/Card/CardSkeleton";
 import "./Feed.css";
 
 const FeedPage = () => {
+  
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const isModalOpen = utilStore((state) => state.isModalOpen);
   const closeModal = utilStore((state) => state.closeModal);

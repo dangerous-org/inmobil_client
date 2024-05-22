@@ -14,6 +14,8 @@ const ProfilePage = () => {
 
   const user = authStore((state) => state.user);
 
+  const isAuthenticated = authStore((state)=>state.isAuthenticated);
+
   const userProfile = userProfileStore((state) => state.userProfile);
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
   const userProfilePosts = userProfileStore((state) => state.userProfilePosts);
@@ -89,7 +91,7 @@ const ProfilePage = () => {
                       key={post._id}
                       post={post}
                       isLoading={isProfileLoading}
-                      options
+                      options={isAuthenticated && user.userName == userProfile.user.userName}
                     />
                   );
                 })
