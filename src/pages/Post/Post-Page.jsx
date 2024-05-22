@@ -17,6 +17,7 @@ import utilStore from "../../store/utilStore";
 import "./PostPage.css";
 
 const PostPage = () => {
+
   const [searchParam] = useSearchParams();
   const id = searchParam.get("id");
 
@@ -24,8 +25,8 @@ const PostPage = () => {
   const [postSelected] = postStore((state) => state.postSelected);
   const getPostById = postStore((state) => state.getPostById);
 
-  const isModalOpen = utilStore((state) => state.isModalOpen);
-  const closeModal = utilStore((state) => state.closeModal);
+  const isPostModalCarrouselOpen = utilStore((state) => state.isPostModalCarrouselOpen);
+  const closePostModal = utilStore((state) => state.closePostModal);
   const selectedImages = utilStore((state) => state.selectedImages);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
@@ -40,20 +41,20 @@ const PostPage = () => {
 
   const handleCloseModal = () => {
     setSelectedImage([]);
-    closeModal();
+    closePostModal();
     setDropMenuDisabled(false);
   };
 
   return (
     <div
       className={`w-screen h-screen flex flex-col overflow-x-hidden ${
-        isModalOpen ? "modal-open" : ""
+        isPostModalCarrouselOpen ? "modal-open" : ""
       }`}
     >
       <NavBar />
       <main className="flex flex-1 gap-3 justify-center items-center pt-5 mt-[70px] w-[95%] mx-auto">
         <Modal
-          isOpen={isModalOpen}
+          isOpen={isPostModalCarrouselOpen}
           title="Photos"
           width={"900"}
           height={"530"}

@@ -14,6 +14,7 @@ import "./Card.css";
 import OptionsIcon from "../icons/OptionsIcon";
 
 const Card = ({ post, options = false }) => {
+
   const navigate = useNavigate();
 
   const userProfile = userProfileStore((state) => state.userProfile);
@@ -36,7 +37,7 @@ const Card = ({ post, options = false }) => {
               <DropdownItem key="edit">Edit Post</DropdownItem>
               <DropdownItem
                 key="delete"
-                className="text-danger hover:bg-redDefault hover:text-white transition-all duration-200"
+                className="hover:bg-redDefault hover:text-white transition-all duration-200"
                 color="none"
               >
                 Delete Post

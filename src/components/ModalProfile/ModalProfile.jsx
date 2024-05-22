@@ -19,7 +19,8 @@ import authStore from "../../store/authStore";
 import filetypes from "../../data/fileTypes";
 
 const ModalProfile = () => {
-  const isProfileLoading = userProfileStore((state) => state.isProfileLoading);
+
+  const isProfileUpdating = userProfileStore((state) => state.isProfileUpdating);
 
   const userProfile = userProfileStore((state) => state.userProfile);
 
@@ -185,7 +186,7 @@ const ModalProfile = () => {
                     />
                   </div>
                   <Button
-                    isLoading={isProfileLoading}
+                    isLoading={isProfileUpdating}
                     type="submit"
                     className="w-full h-11 bg-default-black text-white rounded-md"
                   >

@@ -4,9 +4,8 @@ import utilStore from "../../store/utilStore";
 import "./ImagesGrid.css";
 
 const ImagesGrid = ({ images = [] }) => {
-  
   let showedImages = images.slice(0, 4);
-  const openModal = utilStore((state) => state.openModal);
+  const openPostModal = utilStore((state) => state.openPostModal);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const setSelectedImageIndex = utilStore(
@@ -17,14 +16,14 @@ const ImagesGrid = ({ images = [] }) => {
     setSelectedImage(images);
     setDropMenuDisabled(true);
     setSelectedImageIndex(index);
-    openModal();
+    openPostModal();
   };
 
   const handleButtonClick = () => {
     setSelectedImage(images);
     setDropMenuDisabled(true);
     setSelectedImageIndex(0);
-    openModal();
+    openPostModal();
   };
 
   return (
