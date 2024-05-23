@@ -5,7 +5,7 @@ import "./ImagesGrid.css";
 
 const ImagesGrid = ({ images = [] }) => {
   let showedImages = images.slice(0, 4);
-  const openPostModal = utilStore((state) => state.openPostModal);
+  const openPostModalCarrousel = utilStore((state) => state.openPostModalCarrousel);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
   const setSelectedImageIndex = utilStore(
@@ -16,14 +16,14 @@ const ImagesGrid = ({ images = [] }) => {
     setSelectedImage(images);
     setDropMenuDisabled(true);
     setSelectedImageIndex(index);
-    openPostModal();
+    openPostModalCarrousel();
   };
 
   const handleButtonClick = () => {
     setSelectedImage(images);
     setDropMenuDisabled(true);
     setSelectedImageIndex(0);
-    openPostModal();
+    openPostModalCarrousel();
   };
 
   return (

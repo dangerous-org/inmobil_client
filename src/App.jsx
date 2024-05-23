@@ -5,6 +5,8 @@ import authStore from "./store/authStore";
 import AppRoutes from "./routes/AppRoutes";
 import { useEffect } from "react";
 function App() {
+
+  
   const authenticateUser = authStore((state) => state.authenticateUser);
 
   useEffect(() => {

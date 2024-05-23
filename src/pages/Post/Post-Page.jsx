@@ -26,7 +26,7 @@ const PostPage = () => {
   const getPostById = postStore((state) => state.getPostById);
 
   const isPostModalCarrouselOpen = utilStore((state) => state.isPostModalCarrouselOpen);
-  const closePostModal = utilStore((state) => state.closePostModal);
+  const closePostModalCarrousel = utilStore((state) => state.closePostModalCarrousel);
   const selectedImages = utilStore((state) => state.selectedImages);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
   const setDropMenuDisabled = utilStore((state) => state.setDropMenuDisabled);
@@ -41,7 +41,7 @@ const PostPage = () => {
 
   const handleCloseModal = () => {
     setSelectedImage([]);
-    closePostModal();
+    closePostModalCarrousel();
     setDropMenuDisabled(false);
   };
 
@@ -57,10 +57,10 @@ const PostPage = () => {
           isOpen={isPostModalCarrouselOpen}
           title="Photos"
           width={"900"}
-          height={"530"}
+          height={"500"}
           onClose={handleCloseModal}
         >
-          <div className="w-full h-[87%] mt-1">
+          <div className="w-full h-[87%]">
             <Carrousel
               images={selectedImages}
               index={SelectedImageIndex != null ? SelectedImageIndex : 0}

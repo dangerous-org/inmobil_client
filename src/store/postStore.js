@@ -13,6 +13,7 @@ const postStore = create((set) => ({
   message: null,
   postSearch: "",
   postSelected: [],
+  postToEdit: {},
   createPost: async (data) => {
     try {
       set(() => ({ isLoading: true }));
@@ -64,6 +65,9 @@ const postStore = create((set) => ({
   },
   setPostSearch: (state) => {
     set(() => ({ postSearch: state }));
+  },
+  setPostToEdit: (post) => {
+    set(() => ({ postToEdit: post }));
   },
 }));
 
