@@ -4,6 +4,7 @@ import {
   getPostById,
   createPost,
   getPostFilteredHttp,
+  updatePostHttp,
 } from "../api/postHttp";
 
 const postStore = create((set) => ({
@@ -13,7 +14,6 @@ const postStore = create((set) => ({
   message: null,
   postSearch: "",
   postSelected: [],
-  postToEdit: {},
   createPost: async (data) => {
     try {
       set(() => ({ isLoading: true }));
@@ -66,8 +66,17 @@ const postStore = create((set) => ({
   setPostSearch: (state) => {
     set(() => ({ postSearch: state }));
   },
-  setPostToEdit: (post) => {
-    set(() => ({ postToEdit: post }));
+  updatePost: async (data, postId) => {
+    try {
+      set(() => ({ isLoading: true }));
+      const response = await updatePostHttp(data, postId);
+      set(() => ({ postSelected: response.data }));
+      return response;
+    } catch (error) {
+      set(() => ({ message: error.response.data.message }));
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
   },
 }));
 

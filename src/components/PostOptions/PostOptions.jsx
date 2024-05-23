@@ -10,20 +10,17 @@ import OptionsIcon from "../icons/OptionsIcon";
 import utilStore from "../../store/utilStore";
 import postStore from "../../store/postStore";
 
-const PostOptions = ({ post }) => {
-
+const PostOptions = () => {
+  
+  const setPostToEdit = postStore((state) => state.setPostToEdit);
   const openEditPostModal = utilStore((state) => state.openEditPostModal);
-
-  const setPostToEdit = postStore((state)=> state.setPostToEdit);
 
   const handleAction = (key) => {
     switch (key) {
       case "editPost":
-        setPostToEdit(post);
-        openEditPostModal();            
+        openEditPostModal();
         break;
       case "delete":
-        alert(JSON.stringify(post));
         break;
     }
   };
@@ -31,7 +28,7 @@ const PostOptions = ({ post }) => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <button className="absolute top-2 right-1 outline-none bg-transparent">
+        <button className="absolute top-2 right-4 outline-none bg-transparent">
           <OptionsIcon />
         </button>
       </DropdownTrigger>
@@ -53,7 +50,3 @@ const PostOptions = ({ post }) => {
 };
 
 export default PostOptions;
-
-PostOptions.propTypes = {
-  post: PropTypes.object,
-};

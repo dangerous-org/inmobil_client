@@ -7,7 +7,6 @@ import userProfileStore from "../../../store/userProfile.store";
 import authStore from "../../../store/authStore";
 import ModalProfile from "../../../components/ModalProfile/ModalProfile";
 import CardSkeleton from "../../../components/Card/CardSkeleton";
-import ModalEditPost from "../../../components/ModalEditPost/ModalEditPost";
 import "./Profile.css";
 
 
@@ -15,8 +14,6 @@ const ProfilePage = () => {
   const { userName } = useParams();
 
   const user = authStore((state) => state.user);
-
-  const isAuthenticated = authStore((state)=>state.isAuthenticated);
 
   const userProfile = userProfileStore((state) => state.userProfile);
   const getUserProfile = userProfileStore((state) => state.getUserProfile);
@@ -69,7 +66,6 @@ const ProfilePage = () => {
               userProfile.user._id == user._id ? (
                 <ModalProfile/>
               ) : null}
-              <ModalEditPost/>
             </div>
           </div>
           <div className="flex flex-1 justify-center">
@@ -94,7 +90,6 @@ const ProfilePage = () => {
                       key={post._id}
                       post={post}
                       isLoading={isProfileLoading}
-                      options={isAuthenticated && user.userName == userProfile.user.userName}
                     />
                   );
                 })

@@ -19,3 +19,8 @@ export const getPostFilteredHttp = async (filter) => {
   const response = await axiosConfig.get(`/posts/find?termino=${filter}`);
   return response;
 };
+
+export const updatePostHttp = async (data, postId) => {
+  const response = await axiosConfig.put(`/posts/update?id=${postId}`, data);
+  return response;
+};

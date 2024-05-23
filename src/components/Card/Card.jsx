@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import LocationIcon from "../icons/LocationIcon";
 import User from "../User/User";
 import userProfileStore from "../../store/userProfile.store";
-import PostOptions from "../PostOptions/PostOptions";
 import "./Card.css";
 
-const Card = ({ post, options = false }) => {
+const Card = ({ post}) => {
 
   const navigate = useNavigate();
 
@@ -20,7 +19,6 @@ const Card = ({ post, options = false }) => {
   return (
     <div className="card hover:cursor-pointer" onClick={handleClick}>
       <header className="cardHeader relative">
-        {options ? <PostOptions post={post}/> : null}
         <Carrousel images={post.photos} />
       </header>
       <main className="cardBody">

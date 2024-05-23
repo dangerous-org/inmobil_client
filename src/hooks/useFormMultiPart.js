@@ -41,6 +41,7 @@ const useFormMultipart = (initialState = {}) => {
     data,
     photos,
     date,
+    setData
   };
 };
 
