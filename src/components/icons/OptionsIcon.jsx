@@ -2,7 +2,7 @@
 const OptionsIcon = (props) => {
   return (
     <svg
-      fill="#fff"
+      fill="#000"
       viewBox="0 0 16 16"
       height="1.8em"
       width="1.8em"

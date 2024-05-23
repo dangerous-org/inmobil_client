@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+import { PropTypes } from "prop-types";
 import {
   Modal,
   ModalContent,
@@ -18,35 +17,49 @@ import useFormMultiPart from "../../hooks/useFormMultiPart";
 import filetypes from "../../data/fileTypes";
 import { status, typeEstates, typeOffers } from "../../data/selectData";
 import utilStore from "../../store/utilStore";
+import moment from "moment";
 import postStore from "../../store/postStore";
+import { useEffect } from "react";
 
 const ModalEditPost = () => {
-  const postToEdit = postStore((state) => state.postToEdit);
-  const setPostToEdit = postStore((state) => state.setPostToEdit);
-
+  const [postSelected] = postStore((state) => state.postSelected);
   const isModalEditPostOpen = utilStore((state) => state.isModalEditPostOpen);
   const closeEditPostModal = utilStore((state) => state.closeEditPostModal);
+
+  const updatePost = postStore((state) => state.updatePost);
 
   const {
     handleChangeFiles,
     handleChange,
     handleDateChange,
-    clearForm,
+    // clearForm,
     data,
     photos,
     date,
+    setData,
   } = useFormMultiPart({
-    title: postToEdit.title,
+    title: "",
     description: "",
-    typeOffer:"",
+    typeOffer: "",
     location: "",
     status: "",
     price: "",
     typeEstate: "",
   });
 
+  useEffect(() => {
+    setData({
+      title: postSelected && postSelected.title,
+      description: postSelected && postSelected.description,
+      typeOffer: postSelected && postSelected.typeOffer,
+      location: postSelected && postSelected.location,
+      status: postSelected && postSelected.status,
+      price: postSelected && postSelected.price,
+      typeEstate: postSelected && postSelected.typeEstate,
+    });
+  }, [postSelected, setData]);
+
   const handleSubmit = async (evt) => {
-    alert(JSON.stringify(postToEdit));
     evt.preventDefault();
     const formData = new FormData();
     formData.append("title", data.title);
@@ -57,13 +70,14 @@ const ModalEditPost = () => {
     formData.append("price", data.price);
     formData.append("typeEstate", data.typeEstate);
     formData.append("builtDate", moment(date).format());
-    formData.append("user", user._id);
     photos.forEach((photo) => {
       formData.append("photos", photo);
     });
+    const res = await updatePost(formData, postSelected._id);
+    console.log(res);
   };
+
   const handleCloseModal = () => {
-    setPostToEdit({});
     closeEditPostModal();
   };
 
@@ -218,3 +232,7 @@ const ModalEditPost = () => {
 };
 
 export default ModalEditPost;
+
+ModalEditPost.propTypes = {
+  post: PropTypes.object,
+};
