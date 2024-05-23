@@ -4,14 +4,8 @@ import { useNavigate } from "react-router-dom";
 import LocationIcon from "../icons/LocationIcon";
 import User from "../User/User";
 import userProfileStore from "../../store/userProfile.store";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
+import PostOptions from "../PostOptions/PostOptions";
 import "./Card.css";
-import OptionsIcon from "../icons/OptionsIcon";
 
 const Card = ({ post, options = false }) => {
 
@@ -26,25 +20,7 @@ const Card = ({ post, options = false }) => {
   return (
     <div className="card hover:cursor-pointer" onClick={handleClick}>
       <header className="cardHeader relative">
-        {options ? (
-          <Dropdown>
-            <DropdownTrigger>
-              <button className="absolute top-2 right-1 outline-none bg-transparent">
-                <OptionsIcon />
-              </button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Static Actions">
-              <DropdownItem key="edit">Edit Post</DropdownItem>
-              <DropdownItem
-                key="delete"
-                className="hover:bg-redDefault hover:text-white transition-all duration-200"
-                color="none"
-              >
-                Delete Post
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        ) : null}
+        {options ? <PostOptions post={post}/> : null}
         <Carrousel images={post.photos} />
       </header>
       <main className="cardBody">

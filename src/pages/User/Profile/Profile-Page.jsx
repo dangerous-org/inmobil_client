@@ -5,9 +5,11 @@ import { useParams } from "react-router-dom";
 import Card from "../../../components/Card/Card";
 import userProfileStore from "../../../store/userProfile.store";
 import authStore from "../../../store/authStore";
-import "./Profile.css";
 import ModalProfile from "../../../components/ModalProfile/ModalProfile";
 import CardSkeleton from "../../../components/Card/CardSkeleton";
+import ModalEditPost from "../../../components/ModalEditPost/ModalEditPost";
+import "./Profile.css";
+
 
 const ProfilePage = () => {
   const { userName } = useParams();
@@ -65,8 +67,9 @@ const ProfilePage = () => {
               {userProfile.user != undefined &&
               user != undefined &&
               userProfile.user._id == user._id ? (
-                <ModalProfile />
+                <ModalProfile/>
               ) : null}
+              <ModalEditPost/>
             </div>
           </div>
           <div className="flex flex-1 justify-center">
