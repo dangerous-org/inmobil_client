@@ -12,6 +12,7 @@ const postStore = create((set) => ({
   isPostsLoading: false,
   post: [],
   message: null,
+  updatePostMessage: null,
   postSearch: "",
   postSelected: [],
   createPost: async (data) => {
@@ -70,10 +71,11 @@ const postStore = create((set) => ({
     try {
       set(() => ({ isLoading: true }));
       const response = await updatePostHttp(data, postId);
+      console.log(response);
       set(() => ({ postSelected: response.data }));
       return response;
     } catch (error) {
-      set(() => ({ message: error.response.data.message }));
+      set(() => ({ updatePostMessage: error.response.data.message }));
     } finally {
       set(() => ({ isLoading: false }));
     }

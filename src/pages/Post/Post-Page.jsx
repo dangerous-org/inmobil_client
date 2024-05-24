@@ -88,7 +88,7 @@ const PostPage = () => {
         )}
         <section className="flex flex-col flex-1 h-[85%] ml-10 pl-5 relative">
           <header className="w-full h-10 pl-3 mt-1">
-            <h2 className="text-5xl font-semibold">
+            <h2 className="text-2xl font-semibold">
               {postSelected && postSelected.title}
             </h2>
             {isAuthenticated && user.userName == postSelected?.userData.userName ? <PostOptions key={id} /> : null}
@@ -130,7 +130,7 @@ const PostPage = () => {
             </div>
             <div className="flex items-center gap-x-2 mt-4">
               <IconLogoUsd />
-              <span className="text-black text-4xl font-bold">
+              <span className="text-black text-2xl font-bold">
                 {postSelected &&
                   new Intl.NumberFormat("es-CO").format(postSelected.price)}
               </span>
