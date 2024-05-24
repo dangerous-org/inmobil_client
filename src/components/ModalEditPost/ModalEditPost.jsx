@@ -1,4 +1,3 @@
-import { PropTypes } from "prop-types";
 import {
   Modal,
   ModalContent,
@@ -17,12 +16,18 @@ import useFormMultiPart from "../../hooks/useFormMultiPart";
 import filetypes from "../../data/fileTypes";
 import { status, typeEstates, typeOffers } from "../../data/selectData";
 import utilStore from "../../store/utilStore";
-import moment from "moment";
+// import moment from "moment";
 import postStore from "../../store/postStore";
+// import { parseAbsoluteToLocal } from '@internationalized/date'
 import { useEffect } from "react";
+import { parseAbsoluteToLocal } from "@internationalized/date";
 
 const ModalEditPost = () => {
+
   const [postSelected] = postStore((state) => state.postSelected);
+  const isLoading = postStore((state) => state.isLoading);
+  const updatePostMessage = postStore((state) => state.updatePostMessage);
+
   const isModalEditPostOpen = utilStore((state) => state.isModalEditPostOpen);
   const closeEditPostModal = utilStore((state) => state.closeEditPostModal);
 
@@ -32,10 +37,9 @@ const ModalEditPost = () => {
     handleChangeFiles,
     handleChange,
     handleDateChange,
-    // clearForm,
     data,
-    photos,
-    date,
+    // photos,
+    // date,
     setData,
   } = useFormMultiPart({
     title: "",
@@ -69,12 +73,14 @@ const ModalEditPost = () => {
     formData.append("status", data.status);
     formData.append("price", data.price);
     formData.append("typeEstate", data.typeEstate);
-    formData.append("builtDate", moment(date).format());
-    photos.forEach((photo) => {
-      formData.append("photos", photo);
-    });
-    const res = await updatePost(formData, postSelected._id);
-    console.log(res);
+    // formData.append("builtDate", moment(date).format());
+    // photos.forEach((photo) => {
+    //   formData.append("photos", photo);
+    // });
+    const response = await updatePost(formData, postSelected._id);
+    if(response?.status == 200){
+      handleCloseModal();
+    }
   };
 
   const handleCloseModal = () => {
@@ -151,6 +157,8 @@ const ModalEditPost = () => {
                       variant="bordered"
                       showMonthAndYearPickers
                       onChange={handleDateChange}
+                      defaultValue={postSelected && parseAbsoluteToLocal(postSelected.builtDate)}
+                      granularity="day"
                     />
                   </section>
                   <section className="flex gap-1">
@@ -160,7 +168,7 @@ const ModalEditPost = () => {
                       className="max-w-md"
                       name="typeOffer"
                       variant="bordered"
-                      value={data.typeOffer}
+                      selectedKeys={[data.typeOffer]}
                       onChange={handleChange}
                     >
                       {typeOffers.map((type) => (
@@ -175,7 +183,7 @@ const ModalEditPost = () => {
                       className="max-w-md"
                       name="status"
                       variant="bordered"
-                      value={data.status}
+                      selectedKeys={[data.status]}
                       onChange={handleChange}
                     >
                       {status.map((status) => (
@@ -203,7 +211,7 @@ const ModalEditPost = () => {
                         className="max-w-md"
                         name="typeEstate"
                         variant="bordered"
-                        value={data.typeEstate}
+                        selectedKeys={[data.typeEstate]}
                         onChange={handleChange}
                       >
                         {typeEstates.map((estate) => (
@@ -214,6 +222,7 @@ const ModalEditPost = () => {
                       </Select>
                       <Button
                         type="submit"
+                        isLoading={isLoading}
                         className="w-full h-11 bg-default-black text-white rounded-md"
                       >
                         Save
@@ -222,7 +231,9 @@ const ModalEditPost = () => {
                   </section>
                 </form>
               </ModalBody>
-              <ModalFooter className="h-6 flex justify-center items-center"></ModalFooter>
+              <ModalFooter className="h-6 flex justify-center items-center">
+                <p className="">{updatePostMessage && updatePostMessage}</p>
+              </ModalFooter>
             </>
           )}
         </ModalContent>
@@ -233,6 +244,3 @@ const ModalEditPost = () => {
 
 export default ModalEditPost;
 
-ModalEditPost.propTypes = {
-  post: PropTypes.object,
-};

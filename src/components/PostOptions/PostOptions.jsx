@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import PropTypes from "prop-types";
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,11 +6,9 @@ import {
 } from "@nextui-org/react";
 import OptionsIcon from "../icons/OptionsIcon";
 import utilStore from "../../store/utilStore";
-import postStore from "../../store/postStore";
 
 const PostOptions = () => {
   
-  const setPostToEdit = postStore((state) => state.setPostToEdit);
   const openEditPostModal = utilStore((state) => state.openEditPostModal);
 
   const handleAction = (key) => {
@@ -28,7 +24,7 @@ const PostOptions = () => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <button className="absolute top-2 right-4 outline-none bg-transparent">
+        <button className="absolute top-2 right-1 outline-none bg-transparent z-0">
           <OptionsIcon />
         </button>
       </DropdownTrigger>

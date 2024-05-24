@@ -18,5 +18,6 @@ export const typeEstates = [
   { label: "Room", value: "Room" },
   { label: "Office", value: "Office" },
   { label: "Local", value: "Local" },
-  { label: "Building", value: "Building" }
+  { label: "Building", value: "Building" },
+  { label: "Other", value: "Other" }
 ];
