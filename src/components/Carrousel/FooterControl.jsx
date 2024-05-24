@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const FooterControl = ({ images, setCurrentImgIndex }) => {
   return (
-    <div className="flex justify-center mx-auto gap-4">
+    <div className="flex justify-center mx-auto gap-4" aria-label="footer control" role="group">
       {images.map((image, index) => {
         return (
           <img

@@ -16,14 +16,13 @@ import useFormMultiPart from "../../hooks/useFormMultiPart";
 import filetypes from "../../data/fileTypes";
 import { status, typeEstates, typeOffers } from "../../data/selectData";
 import utilStore from "../../store/utilStore";
-// import moment from "moment";
+import moment from "moment";
 import postStore from "../../store/postStore";
-// import { parseAbsoluteToLocal } from '@internationalized/date'
 import { useEffect } from "react";
 import { parseAbsoluteToLocal } from "@internationalized/date";
 
 const ModalEditPost = () => {
-
+  
   const [postSelected] = postStore((state) => state.postSelected);
   const isLoading = postStore((state) => state.isLoading);
   const updatePostMessage = postStore((state) => state.updatePostMessage);
@@ -38,9 +37,10 @@ const ModalEditPost = () => {
     handleChange,
     handleDateChange,
     data,
-    // photos,
-    // date,
+    photos,
+    date,
     setData,
+    setDate,
   } = useFormMultiPart({
     title: "",
     description: "",
@@ -61,7 +61,8 @@ const ModalEditPost = () => {
       price: postSelected && postSelected.price,
       typeEstate: postSelected && postSelected.typeEstate,
     });
-  }, [postSelected, setData]);
+    setDate(postSelected && postSelected.builtDate);
+  }, [postSelected, setData, setDate]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -73,12 +74,14 @@ const ModalEditPost = () => {
     formData.append("status", data.status);
     formData.append("price", data.price);
     formData.append("typeEstate", data.typeEstate);
-    // formData.append("builtDate", moment(date).format());
-    // photos.forEach((photo) => {
-    //   formData.append("photos", photo);
-    // });
+    formData.append("builtDate", moment(date).format());
+    if (photos.length > 0) {
+      photos.forEach((photo) => {
+        formData.append("photos", photo);
+      });
+    }
     const response = await updatePost(formData, postSelected._id);
-    if(response?.status == 200){
+    if (response?.status == 200) {
       handleCloseModal();
     }
   };
@@ -157,7 +160,10 @@ const ModalEditPost = () => {
                       variant="bordered"
                       showMonthAndYearPickers
                       onChange={handleDateChange}
-                      defaultValue={postSelected && parseAbsoluteToLocal(postSelected.builtDate)}
+                      defaultValue={
+                        postSelected &&
+                        parseAbsoluteToLocal(postSelected.builtDate)
+                      }
                       granularity="day"
                     />
                   </section>
@@ -243,4 +249,3 @@ const ModalEditPost = () => {
 };
 
 export default ModalEditPost;
-
