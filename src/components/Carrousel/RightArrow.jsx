@@ -14,7 +14,7 @@ const RightArrow = ({ setCurrentImgIndex, currentImgIndex, imagesLength }) => {
   };
 
   return imagesLength == 1 ? null : (
-    <button className="rightArrowButton" onClick={handleClick}>
+    <button className="rightArrowButton" onClick={handleClick} aria-label="right arrow">
       <RightArrowIcon />
     </button>
   );

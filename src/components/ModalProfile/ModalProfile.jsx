@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import {
   Modal,
   ModalContent,
@@ -17,10 +16,13 @@ import useFormMultiPart from "../../hooks/useFormMultiPart";
 import userProfileStore from "../../store/userProfile.store";
 import authStore from "../../store/authStore";
 import filetypes from "../../data/fileTypes";
+import { parseAbsoluteToLocal } from "@internationalized/date";
+import { useEffect } from "react";
 
 const ModalProfile = () => {
-
-  const isProfileUpdating = userProfileStore((state) => state.isProfileUpdating);
+  const isProfileUpdating = userProfileStore(
+    (state) => state.isProfileUpdating
+  );
 
   const userProfile = userProfileStore((state) => state.userProfile);
 
@@ -48,6 +50,7 @@ const ModalProfile = () => {
     data,
     photos,
     date,
+    setDate,
   } = useFormMultiPart({
     names: userProfile.names,
     lastName: userProfile.lastName,
@@ -56,6 +59,10 @@ const ModalProfile = () => {
     location: userProfile.location,
     biography: userProfile.biography,
   });
+
+  useEffect(() => {
+    setDate(userProfile && userProfile.birthDate);
+  }, [setDate, userProfile]);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -164,6 +171,11 @@ const ModalProfile = () => {
                       showMonthAndYearPickers
                       size="sm"
                       onChange={handleDateChange}
+                      defaultValue={
+                        userProfile &&
+                        parseAbsoluteToLocal(userProfile.birthDate)
+                      }
+                      granularity="day"
                     />
                   </div>
                   <div className="flex gap-2">

@@ -4,6 +4,7 @@ import utilStore from "../../store/utilStore";
 import "./ImagesGrid.css";
 
 const ImagesGrid = ({ images = [] }) => {
+
   let showedImages = images.slice(0, 4);
   const openPostModalCarrousel = utilStore((state) => state.openPostModalCarrousel);
   const setSelectedImage = utilStore((state) => state.setSelectedImage);
@@ -27,11 +28,11 @@ const ImagesGrid = ({ images = [] }) => {
   };
 
   return (
-    <div className="img-grid">
+    <div className="img-grid" role="contentinfo">
       {showedImages &&
         showedImages.map((image, index) => {
           return (
-            <figure key={image} id="img-container">
+            <figure key={image} id="img-container" aria-label="image">
               <img
                 src={image && image}
                 alt="post image"
