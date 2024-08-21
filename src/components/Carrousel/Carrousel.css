@@ -70,3 +70,12 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: bold;
 }
+
+.carrousel-images {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1; 
+}
+
+.carrousel-images.fade-out {
+  opacity: .5; 
+}
